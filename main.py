@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Thu Mar 16 14:40:52 2023
+
+@author: RANDOM CENTAURUS
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Tue Feb 22 00:29:31 2022
 
 @author: yanri
@@ -9,10 +16,10 @@ import streamlit as st
 import numpy as np
 import sys
 from streamlit import cli as stcli
-from scipy.integrate import dblquad
 from scipy.integrate import quad
-from scipy.integrate import tplquad
 from PIL import Image
+from scipy.optimize import minimize
+
 
 def main():
     #criando 3 colunas
@@ -21,7 +28,7 @@ def main():
     #inserindo na coluna 2
     col2.image(foto, use_column_width=True)
     
-    st.title('A general inspection and opportunistic replacement policy for one-component systems of variable qualityyyyy')
+    st.title('A general inspection and opportunistic replacement policy for one-component systems of variable quality')
 
     menu = ["Application", "Information", "Website"]
     
@@ -33,25 +40,13 @@ def main():
 
         st.subheader("Insert the parameter values below:")
         
-        b1=st.number_input("Insert the weibull shape parameter for weak subpopulation - {}1" .format(chr(946)), min_value = 1.0, max_value = 6.0, value = 2.5) #forma fraca
-        a1=st.number_input("Insert the characteristic life parameter for weak subpopulation - {}1" .format(chr(945)), min_value = 0.0, value = 0.8) #escala fraca
-        b2=st.number_input("Insert the weibull shape parameter for strong subpopulation - {}2" .format(chr(946)), min_value = 1.0, max_value = 6.0, value = 5.0) #forma forte
-        a2=st.number_input("Insert the characteristic life parameter for strong subpopulation - {}2" .format(chr(945)), min_value = 0.0, value = 3.6) #escala forte
-        p=st.number_input("Insert the mixing parameter - q", min_value = 0.0, max_value = 1.0, value = 0.1) #parâmetro de mistura
-        u=st.number_input("Insert the rate of arrival of opportunities parameter - {}" .format(chr(956)), min_value = 0.0, max_value = 5.0, value = 2.0) #taxa de chegada de oportunidades
-        l=st.number_input("Insert the reciprocal of the mean of the delay time distribution parameter - {}" .format(chr(955)), min_value = 0.1, value = 1.0) #inverso da média da distribuição do delay time
-        ci=st.number_input("Insert the cost of inspection parameter - Ci", min_value = 0.0, value = 0.03) #custo de inspeção
-        co=st.number_input("Insert the cost of opportunistic replacement parameter - Co", min_value = 0.0, value = 0.5) #custo da preventiva na oportunidade
-        cf=st.number_input("Insert the cost of corrective replacement parameter - Cf", min_value = 0.0, value = 5.0) #custo de falha
-        cr=st.number_input("Insert the cost of preventive replacement parameter - Cp", min_value = 0.0, value = 1.0) #custo da preventiva
-        
-        st.subheader("Insert the decision variable values below:")
-        
-        delta=st.number_input("Insert the inspection interval - {}" .format(chr(948)), min_value = 0., max_value = 2., step = 0.01)
-        S=st.number_input("Insert the initial threshold of opportunities variable - S", min_value = 0., max_value = 10., step = 0.01) #Limite inferior da janela de oportunidades
-        T=st.number_input("Insert the age for preventive replacement - T", min_value = 0., max_value = 10., step = 0.01) #Limite inferior da janela de oportunidades
-        k=int(st.number_input("Insert the total number of inspection variable - K", min_value = 0, max_value = 10, step = 1)) #Número total de visitas
-        
+        beta = st.sidebar.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
+        eta = st.sidebar.number_input('Parâmetro de escala (eta)', value=100.0, step=10.0, format='%.1f')
+        Cp = st.sidebar.number_input('Custo da manutenção preventiva (Cp)', value=100.0, step=10.0, format='%.1f')
+        Cf = st.number_input('Custo da manutenção corretiva:', min_value=0.01, step=0.01)
+        Tp = st.number_input('Tempo de inatividade para manutenção preventiva:', min_value=0.01, step=0.01)
+        Tf = st.number_input('Tempo de inatividade resultante de falha:', min_value=0.01, step=0.01)
+        DT_max = st.number_input('Downtime máximo aceito:', min_value=0.01, step=0.01)
         st.subheader("Click on botton below to run this application:")
         
         botao = st.button("Get cost-rate")
@@ -60,135 +55,59 @@ def main():
         
             def otm():
 
-                def f01(x):#weibull densidade (componente fraco)
-                    return (b1/a1)*((x/a1)**(b1-1))*np.exp(-(x/a1)**b1)
-                def f02(x):#weibull densidade (componente forte)
-                    return (b2/a2)*((x/a2)**(b2-1))*np.exp(-(x/a2)**b2)
-                def fx(x):
-                    return p*f01(x)+(1-p)*f02(x)
-                def fh(h):#exponencial densidade
-                    return l*np.exp(-l*h)
-                def Fh(h):#exponencial acumulada
-                    return 1-np.exp(-l*h)
+                def f_W(x):
+                    f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta)
+                    return f
                 
-                #Funções utilizadas no cálculo do Custo Esperado
-                def f1(x):
-                    return ((1-Fh(i*delta-x))*fx(x))
-                def f2(x):
-                    return ((Fh(i*delta-x)*fx(x)))
-                def f3(x):
-                    return ((Fh(S-x))*fx(x))
-                def f4(h,x):
-                    return (np.exp(-u*(x+h-S))*fh(h)*fx(x))
-                def f5(h,x):
-                    return ((1-np.exp(-u*(x+h-S)))*fh(h)*fx(x))
-                def f6(x):
-                    return ((1-np.exp(-u*(T-S)))*(1-Fh(T-x))*fx(x))
-                def f7(x):
-                    return ((1-Fh(T-x))*fx(x))
-                
-                #Funções utilizadas no cálculo do Tamanho Esperado
-                def f8(h,x):
-                    return ((x+h)*fh(h)*fx(x))
-                def f9(h,x):
-                    return ((x+h)*np.exp(-u*(x+h-S))*fh(h)*fx(x))
-                def f10(z,h,x):
-                    return ((z+S)*u*np.exp(-u*z)*fh(h)*fx(x))
-                def f11(z,x):
-                    return ((1-Fh(T-x))*(z+S)*u*np.exp(-u*z)*fx(x))
-                def f12(z,x):
-                    return ((1-Fh(T-x))*(z+S)*u*np.exp(-u*z)*fx(x))
-                def f13(z):
-                    return ((z+S)*u*np.exp(-u*z))
+                def R_W(x):
+                    R = np.exp(-(x/eta)**beta)  
+                    return R
 
-                sc = sv = 0                
+                def F_aW(x):
+                    return 1-R_W(x)
 
-                ##CÁLCULO DO CUSTO ESPERADO DO CICLO
+                #Custo esperado de um ciclo de renovação
 
-                #PARTE 1 - EC
-                #Custo quando um defeito é encontrado na iésima inspeção (multiplicado por sua respectiva probabilidade de ocorrência)
-                for i in range (1, k+1):
-                    r,_= quad(f1, (i-1)*delta, i*delta)
-                    sc = sc + ((cr+i*ci)*r)
-                
-                #PARTE 2 - EC
-                #Custo quando ocorre uma falha entre duas inspeções (multiplicado por sua respectiva probabilidade de ocorrência)
-                for i in range (1, k+1):
-                    r,_= quad(f2, (i-1)*delta, i*delta)
-                    sc = sc + ((cf+(i-1)*ci)*r)
-                
-                #PARTE 3 - EC
-                #Custo quando ocorre uma falha após todas as inspeções (multiplicado por sua respectiva probabilidade de ocorrência)
-                r1,_= quad(f3, k*delta, S)
-                r2,_= dblquad(f4, k*delta, S, lambda x: S-x, lambda x: T-x)
-                r3,_= dblquad(f4, S, T, lambda x: 0, lambda x: T-x)
-                sc = sc + ((cf+(k*ci))*(r1+r2+r3))
-                
-                #PARTE 4 - EC
-                #Custo quando o componente é substituido na wear-out phase através de uma oportunidade (multiplicado por sua respectiva probabilidade de ocorrência)
-                r1,_= dblquad(f5, k*delta, S, lambda x: S-x, lambda x: T-x)
-                r2,_= quad(f6, k*delta, S)
-                r3,_= dblquad(f5, S, T, lambda x: 0, lambda x: T-x)
-                r4,_= quad(f6, S, T)
-                r5,_= quad(fx, T, np.inf)
-                sc = sc + ((co+(k*ci))*(r1+r2+r3+r4+((1-np.exp(-u*(T-S)))*r5)))
-                
-                #PARTE 5 - EC
-                #Custo quando o componente é somente substituido de forma preventiva no final do ciclo (multiplicado por sua respectiva probabilidade de ocorrência)
-                r1,_= quad(f7, k*delta, T)
-                r2,_= quad(fx, T, np.inf)
-                Pr=(np.exp(-u*(T-S))*(r1+r2))
-                sc = sc + ((cr+(k*ci))*(np.exp(-u*(T-S))*(r1+r2)))
-                
-                ##CÁLCULO DO TAMANHO ESPERADO DO CICLO
-                
-                #PARTE 1 - EV
-                for i in range(1, k+1):
-                    v,_= quad(f1, (i-1)*delta, i*delta)
-                    v1,_= dblquad(f8, (i-1)*delta, i*delta, lambda x: 0, lambda x: i*delta-x)
-                    sv = sv + (i*delta*v) + v1
-                
-                #PARTE 2 - EV
-                v,_= dblquad(f8, k*delta, S, lambda x: 0, lambda x: S-x)
-                sv = sv + v
-                
-                #PARTE 3 - EV
-                v,_= dblquad(f9, k*delta, S, lambda x: S-x, lambda x: T-x)
-                sv = sv + v
-                
-                #PARTE 4 - EV
-                v,_= dblquad(f9, S, T, lambda x: 0, lambda x: T-x)
-                sv = sv + v
-                
-                #PARTE 5 - EV
-                v,_= tplquad(f10, k*delta, S, lambda x: S-x, lambda x: T-x, lambda x, h: 0, lambda x, h: x+h-S)
-                sv = sv + v
-                
-                #PARTE 6 - EV
-                v,_ = dblquad(f11, k*delta, S, lambda x: 0, lambda x: T-S)
-                sv = sv + v
-                
-                #PARTE 7 - EV
-                v,_= tplquad(f10, S, T, lambda x: 0, lambda x: T-x, lambda x, h: 0, lambda x, h: x+h-S)
-                sv = sv + v
-                
-                #PARTE 8 - EV
-                v,_= dblquad(f12, S, T, lambda x: 0, lambda x: T-S)
-                sv = sv + v
-                
-                #PARTE 9 - EV
-                v,_ = quad(f13, 0, T-S)
-                v3,_ = quad(fx, T, np.inf)
-                v2,_= quad(f7, k*delta, T)
-                sv = sv + v3*v + T*Pr
+                def EC(T):
+                    return Cp*R_W(T) + Cf*F_aW(T)
 
-                #Expected cost-rate
-                c = sc/sv
+                def aa(x):
+                    return (f_W(x)*(x+Tf))
+
+                def EL(T):
+                    fst = (T+Tp)*R_W(T)
+                    sec = quad(aa,0,T)[0]
+                    return fst+sec
+
+                def ED(T):
+                    return Tp*R_W(T) + Tf*F_aW(T)
                 
-                return c
+                def RC(T):
+                    return EC(T)/EL(T)
+                
+                def RD(T):
+                    return ED(T)/EL(T)
+                
+                def restricao(T):
+                    return DT_max - RD(T)
+                
+                #PALPITE INICIAL
+                T0=[0.1]
+                
+                #RESTRIÇÕES
+                cons = [{'type':'ineq','fun':restricao}]
+                
+                otimo = minimize(RC,T0,method='SLSQP',constraints=cons)
+                
+                T_otimo = otimo.x[0]
+                taxa_custo = otimo.fun[0]
+                downtime = RD(otimo.x[0])
+                
+                return T_otimo, taxa_custo, downtime
             
-            taxadecusto = otm()
-            st.write("Cost-rate result: {:.3f}" .format(taxadecusto))
+            st.write("Cost-rate result: {:.3f}" .format(otm[0]))
+            st.write("Cost-rate result: {:.3f}" .format(otm[1]))
+            st.write("Cost-rate result: {:.3f}" .format(otm[2]))
 
     if choice == menu[1]:
         
