@@ -95,9 +95,9 @@ def main():
                 
                 return T_otimo, taxa_custo, downtime
             
-            st.write('O Tempo Ótimo é:', otm()[0])
-            st.write('A Taxa de Custo é:', otm()[1])
-            st.write('O Downtime é:', otm()[2])
+            st.write('O tempo ótimo é:', otm()[0])
+            st.write('A taxa de custo é:', otm()[1])
+            st.write('O downtime é:', otm()[2])
 
 
     if choice == menu[1]:
