@@ -40,9 +40,9 @@ def main():
 
         st.subheader("Insert the parameter values below:")
         
-        beta = st.sidebar.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
-        eta = st.sidebar.number_input('Parâmetro de escala (eta)', value=100.0, step=10.0, format='%.1f')
-        Cp = st.sidebar.number_input('Custo da manutenção preventiva (Cp)', value=100.0, step=10.0, format='%.1f')
+        beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
+        eta = st.number_input('Parâmetro de escala (eta)', value=100.0, step=10.0, format='%.1f')
+        Cp = st.number_input('Custo da manutenção preventiva (Cp)', value=100.0, step=10.0, format='%.1f')
         Cf = st.number_input('Custo da manutenção corretiva:', min_value=0.01, step=0.01)
         Tp = st.number_input('Tempo de inatividade para manutenção preventiva:', min_value=0.01, step=0.01)
         Tf = st.number_input('Tempo de inatividade resultante de falha:', min_value=0.01, step=0.01)
@@ -105,9 +105,10 @@ def main():
                 
                 return T_otimo, taxa_custo, downtime
             
-            st.write("Cost-rate result: {:.3f}" .format(otm[0]))
-            st.write("Cost-rate result: {:.3f}" .format(otm[1]))
-            st.write("Cost-rate result: {:.3f}" .format(otm[2]))
+            st.write(otm[0])
+            st.write(otm[1])
+            st.write(otm[2])
+
 
     if choice == menu[1]:
         
