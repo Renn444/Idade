@@ -103,13 +103,11 @@ def main():
                 taxa_custo = otimo.fun[0]
                 downtime = RD(otimo.x[0])
                 
-                st.write(T_otimo)
-                st.write(taxa_custo)
-                st.write(downtime)
+
                 
                 return T_otimo, taxa_custo, downtime
             
-
+            st.write(otm())
 
 
     if choice == menu[1]:
