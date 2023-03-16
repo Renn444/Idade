@@ -20,7 +20,7 @@ def main():
 
     menu = ["Aplicação", "Informação", "Website"]
     
-    choice = st.sidebar.selectbox("Select here", menu)
+    choice = st.sidebar.selectbox("Selecione aqui", menu)
     
     if choice == menu[0]:
         
