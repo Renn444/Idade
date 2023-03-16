@@ -21,7 +21,7 @@ def main():
     #inserindo na coluna 2
     col2.image(foto, use_column_width=True)
     
-    st.title('A general inspection and opportunistic replacement policy for one-component systems of variable quality')
+    st.title('A general inspection and opportunistic replacement policy for one-component systems of variable qualityyyyy')
 
     menu = ["Application", "Information", "Website"]
     
