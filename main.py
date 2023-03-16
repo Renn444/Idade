@@ -35,7 +35,7 @@ def main():
         Tp = st.number_input('Tempo de inatividade para manutenção preventiva:', min_value=0.01, step=0.01)
         Tf = st.number_input('Tempo de inatividade resultante de falha:', min_value=0.01, step=0.01)
         DT_max = st.number_input('Downtime máximo aceito:', min_value=0.01, step=0.01)
-        st.subheader("Clique no botão abaixo para rodar essa aplicativo:")
+        st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
         botao = st.button("Get cost-rate")
 
