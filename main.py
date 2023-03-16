@@ -26,7 +26,7 @@ def main():
         
         st.header(menu[0])
 
-        st.subheader("Ensira os valores dos parâmetros abaixo:")
+        st.subheader("Insira os valores dos parâmetros abaixo:")
         
         beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
         eta = st.number_input('Parâmetro de escala (eta)', value=100.0, step=10.0, format='%.1f')
