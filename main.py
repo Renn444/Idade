@@ -16,7 +16,7 @@ def main():
     #inserindo na coluna 2
     col2.image(foto, use_column_width=True)
     
-    st.title('A general inspection and opportunistic replacement policy for one-component systems of variable quality')
+    st.title('Política de Manutenção por Idade')
 
     menu = ["Application", "Information", "Website"]
     
@@ -104,47 +104,7 @@ def main():
         
         st.header(menu[1])
         
-        st.write('''This is the information section regarding the prototype created by members of the RANDOM
-research group, which aims to assist in the application of a general inspection and opportunitistic replacement policy
-for one-component systems of variable quality presented by Cavalcante et al. (2021). Here we bring the
-policy summary and the notation of the parameters that are requested at application.
-
-The maintenance policy on this prototype is a hybrid of periodic inspection and
-opportunistic replacement. From new, the system is inspected every {} time units until K{} or a defect is found at 
-inspection or a failure occurs, whichever occurs soonest. Inspections are
-perfect in that the true state of the system is revealed at inspection. 
-Further if the system survives beyond age K{}, then inspection ceases, 
-and the system is replaced on failure or at age T or at
-the first opportunity that arises after age S (S < T), whichever
-occurs soonest. Replacements are instantaneous.
-
-The innovation of this model is the consideration of the age
-threshold for opportunistic replacement S, whereby replacement is
-carried out at opportunities that arise during the wear-out phase
-[K{}, T]. In this way, the policy takes greater care in the initial
-life of an equipment and then in mid-life utilises opportunities for
-more cost-effective replacement. We call this policy 1 and study
-this in detail in the paper.
-
-The decision criterion used in this modeling is the cost rate returned by dividing the
-expected cost and expected length of a renewal cycle, containing the
-following decision variables: K, which represents the number of total inspections that must be
-performed in the component's life cycle; S, which represents bottom of the window of
-opportunities, allowing the system to be replaced through opportunistic maintenance; 
-T, which represents the age for preventive replacement; and {}, which represents the inspection interval.
-
-This prototype has restrictions regarding the solution search space. If it is in the user's 
-interest to use a wider range of solution combinations or if there is
-any question about the study and/or this prototype can be directed to any of the following e-mail 
-addresses. 
-
-c.a.v.cavalcante@random.org.br
-
-a.r.alberti@random.org.br
-
-a.j.s.rodrigues@random.org.br
-
-y.r.melo@random.org.br
+        st.write('''Fazer o texto para colocar aqui
 ''' .format(chr(948), chr(948), chr(948), chr(948), chr(948)))
         
         
