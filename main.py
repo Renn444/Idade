@@ -18,7 +18,7 @@ def main():
     
     st.title('Política de Manutenção por Idade')
 
-    menu = ["Application", "Information", "Website"]
+    menu = ["Aplicação", "Informação", "Website"]
     
     choice = st.sidebar.selectbox("Select here", menu)
     
@@ -26,7 +26,7 @@ def main():
         
         st.header(menu[0])
 
-        st.subheader("Insert the parameter values below:")
+        st.subheader("Ensira os valores dos parâmetros abaixo:")
         
         beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
         eta = st.number_input('Parâmetro de escala (eta)', value=100.0, step=10.0, format='%.1f')
