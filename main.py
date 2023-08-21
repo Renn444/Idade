@@ -137,98 +137,91 @@ def cond1(y):
 def cond2(y):
     return y[2]-y[1] #Z>=T
 
-            c1={'type':'ineq','fun':cond1}
-            c2={'type':'ineq','fun':cond2}
+c1={'type':'ineq','fun':cond1}
+c2={'type':'ineq','fun':cond2}
 
 
-            cons=[c1, c2]
+cons=[c1, c2]
 
 
-            bx0=[0.1,50]
-            bx1=[0.1,50]
-            bx2=[0.1,50]
-            ret=minimize(objetivo, x0, method='SLSQP', bounds=[bx0,bx1,bx2], constraints=cons)
-            S=ret.x[0]
-            T=ret.x[1]
-            Z=ret.x[2]     
-            st.write('S = :', S)
-            st.write('T = :', T)
-            st.write('Z = :', Z)
-            st.write('Taxa de custo = :', rest.fun)
-            print("S=", S)
-            print("T=",T)
-            print("Z=",Z)
-            print("Taxa de custo=", ret.fun)
+bx0=[0.1,50]
+bx1=[0.1,50]
+bx2=[0.1,50]
+ret=minimize(objetivo, x0, method='SLSQP', bounds=[bx0,bx1,bx2], constraints=cons)
+S=ret.x[0]
+T=ret.x[1]
+Z=ret.x[2]     
+st.write('S = :', S)
+st.write('T = :', T)
+st.write('Z = :', Z)
+st.write('Taxa de custo = :', rest.fun)
 
 
-            def MTBOF(S,T,Z):
-                #CASO 1
-                def P1(S):
-                    return Fx(S)
-                def C1(S):
-                    return cf*P1(S)
-                def V1(S):
-                    return (quad(lambda x: x*fx(x), 0, S)[0])  
-                
-                #CASO 2
-                def P2(S,T):
-                    return Rh(T-S)*(Fx(T) - Fx(S)) + (dblquad(lambda x, h: fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
-                def C2(S,T):
-                    return cf*P2(S,T)
-                def V2(S,T):
-                    return Rh(T-S)*(quad(lambda x: x*fx(x), S, T)[0])+ (dblquad(lambda x, h: x*fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
-                
-                #CASO 3
-                def P3(S,T,Z):
-                    return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
-                def C3(S,T,Z):
-                    return cf*P3(S,T,Z)
-                def V3(S,T,Z):
-                    return  p*Rh(T-S)*(quad(lambda x: x*fx(x), T, Z)[0]) + p*(dblquad(lambda x, h: x*fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
-                
-                #CASO 4
-                def P4(S,T):
-                    return (quad(lambda h: fh(h)*Rx(S+h), 0, T-S)[0])
-                def C4(S,T):
-                    return co*P4(S, T)
-                def V4(S,T):
-                    return (quad(lambda h: (S+h)*fh(h)*Rx(S+h), 0, T-S)[0])
-                
-                #CASO 5
-                def P5(S,T,Z):
-                    return p*(quad(lambda h: fh(h)*Rx(S+h), T-S, Z-S)[0])
-                def C5(S,T,Z):
-                    return cw*P5(S, T, Z)
-                def V5(S,T,Z): 
-                    return p*(quad(lambda h: (S+h)*fh(h)*Rx(S+h), T-S, Z-S)[0])
-                
-                #CASO 6
-                def P6(S,T):
-                    return (1-p)*Rh(T-S)*Rx(T) 
-                def C6(S,T):
-                    return cp*P6(S, T)
-                def V6(S,T):
-                    return T*P6(S, T)
-                
-                #CASO 7 
-                def P7(S,T,Z):
-                    return p*Rh(Z-S)*Rx(Z)
-                def C7(S,T,Z):
-                    return cv*P7(S, T, Z)
-                def V7(S,T,Z):
-                    return Z*P7(S, T, Z)
-                
-                SOMA_PROB_FALHAS=P1(S)+P2(S,T)+P3(S, T, Z)
-                SOMA_VIDA=V1(S)+V2(S,T)+V3(S, T, Z)+V4(S, T) + V5(S, T, Z) + V6(S, T)+V7(S, T, Z)
+def MTBOF(S,T,Z):
+    #CASO 1
+    def P1(S):
+        return Fx(S)
+    def C1(S):
+        return cf*P1(S)
+    def V1(S):
+        return (quad(lambda x: x*fx(x), 0, S)[0])  
+    
+    #CASO 2
+    def P2(S,T):
+        return Rh(T-S)*(Fx(T) - Fx(S)) + (dblquad(lambda x, h: fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
+    def C2(S,T):
+        return cf*P2(S,T)
+    def V2(S,T):
+        return Rh(T-S)*(quad(lambda x: x*fx(x), S, T)[0])+ (dblquad(lambda x, h: x*fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
+    
+    #CASO 3
+    def P3(S,T,Z):
+        return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
+    def C3(S,T,Z):
+        return cf*P3(S,T,Z)
+    def V3(S,T,Z):
+        return  p*Rh(T-S)*(quad(lambda x: x*fx(x), T, Z)[0]) + p*(dblquad(lambda x, h: x*fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
+    
+    #CASO 4
+    def P4(S,T):
+        return (quad(lambda h: fh(h)*Rx(S+h), 0, T-S)[0])
+    def C4(S,T):
+        return co*P4(S, T)
+    def V4(S,T):
+        return (quad(lambda h: (S+h)*fh(h)*Rx(S+h), 0, T-S)[0])
+    
+    #CASO 5
+    def P5(S,T,Z):
+        return p*(quad(lambda h: fh(h)*Rx(S+h), T-S, Z-S)[0])
+    def C5(S,T,Z):
+        return cw*P5(S, T, Z)
+    def V5(S,T,Z): 
+        return p*(quad(lambda h: (S+h)*fh(h)*Rx(S+h), T-S, Z-S)[0])
+    
+    #CASO 6
+    def P6(S,T):
+        return (1-p)*Rh(T-S)*Rx(T) 
+    def C6(S,T):
+        return cp*P6(S, T)
+    def V6(S,T):
+        return T*P6(S, T)
+    
+    #CASO 7 
+    def P7(S,T,Z):
+        return p*Rh(Z-S)*Rx(Z)
+    def C7(S,T,Z):
+        return cv*P7(S, T, Z)
+    def V7(S,T,Z):
+        return Z*P7(S, T, Z)
+    
+    SOMA_PROB_FALHAS=P1(S)+P2(S,T)+P3(S, T, Z)
+    SOMA_VIDA=V1(S)+V2(S,T)+V3(S, T, Z)+V4(S, T) + V5(S, T, Z) + V6(S, T)+V7(S, T, Z)
 
-                
-                MTBOF=SOMA_PROB_FALHAS/SOMA_VIDA
-                return MTBOF
+    
+    MTBOF=SOMA_PROB_FALHAS/SOMA_VIDA
+    return MTBOF    
 
-            print("MTBOF=",MTBOF(S,T,Z))
-                
-            
-            st.write('MTBOF:', MTFBOF(S,T,Z))
+st.write('MTBOF:', MTFBOF(S,T,Z))
 
 
     if choice == menu[1]:
