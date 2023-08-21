@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-iimport math
+import math
 import sympy
 import numpy as np 
 import pandas as pd
