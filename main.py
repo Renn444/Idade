@@ -225,22 +225,22 @@ st.write('MTBOF:', MTFBOF(S,T,Z))
 
 
 if choice == menu[1]:
-    
-    st.header(menu[1])
-    
-    st.write('''Fazer o texto para colocar aqui
+
+st.header(menu[1])
+
+st.write('''Fazer o texto para colocar aqui
 ''' .format(chr(948), chr(948), chr(948), chr(948), chr(948)))
-    
-    
+
+
 if choice == menu[2]:
-    
-    st.header(menu[2])
-    
-    st.write('''The Research Group on Risk and Decision Analysis in Operations and Maintenance was created in 2012 
-             in order to bring together different researchers who work in the following areas: risk, maintenance a
-             nd operation modelling. Learn more about it through our website.''')
-    st.markdown('[Click here to be redirected to our website](http://random.org.br/en/)',False)
-    
+
+st.header(menu[2])
+
+st.write('''The Research Group on Risk and Decision Analysis in Operations and Maintenance was created in 2012 
+         in order to bring together different researchers who work in the following areas: risk, maintenance a
+         nd operation modelling. Learn more about it through our website.''')
+st.markdown('[Click here to be redirected to our website](http://random.org.br/en/)',False)
+
 if st._is_running_with_streamlit:
 main()
 else:
