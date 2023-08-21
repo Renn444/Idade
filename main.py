@@ -9,7 +9,6 @@ from scipy.integrate import quad
 from PIL import Image
 from scipy.optimize import minimize
 
-
 def main():
     #criando 3 colunas
     col1, col2, col3 = st.columns(3)
@@ -41,11 +40,9 @@ def main():
         
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
-        
         botao = st.button("Obtenha os valores")
 
         if botao:
-        
            def fx(x):
               f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta)
               return f
@@ -53,8 +50,6 @@ def main():
                return 1 - np.exp(-(x/eta)**beta) 
            def Rx(x): 
                return 1 - Fx(x)
-               
-           # parte que não entendi muito bem 
            # tempo entre oportunidades
            def fh(h):
               return lbda*np.exp(-(lbda*h))
@@ -119,11 +114,9 @@ def main():
                    return cv*P7(S, T, Z)
                def V7(S,T,Z):
                    return Z*P7(S, T, Z)
-               
                 SOMA_PROB=P1(S)+P2(S,T)+P3(S, T, Z)+P4(S, T) + P5(S, T, Z) + P6(S, T)+P7(S, T, Z)
                 SOMA_CUST=C1(S)+C2(S,T)+C3(S, T, Z)+C4(S, T) + C5(S, T, Z) + C6(S, T)+C7(S, T, Z)
                 SOMA_VIDA=V1(S)+V2(S,T)+V3(S, T, Z)+V4(S, T) + V5(S, T, Z) + V6(S, T)+V7(S, T, Z)
-                
                 TAXA_CUSTO=SOMA_CUST/SOMA_VIDA
                 return TAXA_CUSTO
             x0 = [0.9, 1.0,2.0]
