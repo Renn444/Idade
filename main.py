@@ -242,7 +242,7 @@ if choice == menu[2]:
     st.markdown('[Click here to be redirected to our website](http://random.org.br/en/)',False)
 
 if st._is_running_with_streamlit:
-main()
+    main()
 else:
 sys.argv = ["streamlit", "run", sys.argv[0]]
 sys.exit(stcli.main())
