@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import math
-import sympy
 import numpy as np 
 import pandas as pd
 from scipy.integrate import quad, dblquad, tplquad
