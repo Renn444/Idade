@@ -226,7 +226,7 @@ st.write('MTBOF:', MTFBOF(S,T,Z))
 
 if choice == menu[1]:
 
-st.header(menu[1])
+  st.header(menu[1])
 
 st.write('''Fazer o texto para colocar aqui
 ''' .format(chr(948), chr(948), chr(948), chr(948), chr(948)))
