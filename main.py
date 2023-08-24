@@ -127,7 +127,7 @@ def main():
     
     TAXA_CUSTO=SOMA_CUST/SOMA_VIDA
     return TAXA_CUSTO
-st.write("Taxa de Custo): ", TAXA_CUSTO)
+    st.write("Taxa de Custo): ", TAXA_CUSTO)
 
 if choice == menu[1]:
 
