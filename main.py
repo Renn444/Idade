@@ -142,7 +142,7 @@ st.write('T = :', T)
 st.write('Z = :', Z)
 st.write('Taxa de custo = :', ret.fun)  # Corrigindo o nome da variável
         
-    def MTBOF(S,T,Z):
+def MTBOF(S,T,Z):
     #CASO 1
     def P1(S):
         return Fx(S)
