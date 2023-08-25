@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import math
 import numpy as np
 import pandas as pd
@@ -23,7 +22,7 @@ def main():
         st.header(menu[0])
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
-                beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
+        beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
         eta = st.number_input('Parâmetro de escala (eta)', value=100.0, step=10.0, format='%.1f')
         lbda= st.number_input('Taxa de Chegada de Oportunidade (Lambda)', value=2.0, step=0.1, format='%.1f')
         cp = st.number_input('Custo de Substituição Preventiva em T(programado):', value=100.0, step=10.0, format='%.1f') #FEITO
@@ -135,15 +134,15 @@ bx0=[0.1,50]
 bx1=[0.1,50]
 bx2=[0.1,50]
 
-        ret = minimize(objetivo, x0, method='SLSQP', bounds=[bx0, bx1, bx2], constraints=cons)
-        S, T, Z = ret.x[0], ret.x[1], ret.x[2]
+ret = minimize(objetivo, x0, method='SLSQP', bounds=[bx0, bx1, bx2], constraints=cons)
+S, T, Z = ret.x[0], ret.x[1], ret.x[2]
 
-        st.write('S = :', S)
-        st.write('T = :', T)
-        st.write('Z = :', Z)
-        st.write('Taxa de custo = :', ret.fun)  # Corrigindo o nome da variável
+st.write('S = :', S)
+st.write('T = :', T)
+st.write('Z = :', Z)
+st.write('Taxa de custo = :', ret.fun)  # Corrigindo o nome da variável
         
-        def MTBOF(S,T,Z):
+    def MTBOF(S,T,Z):
     #CASO 1
     def P1(S):
         return Fx(S)
@@ -227,4 +226,3 @@ if choice == menu[2]:
 
 if __name__ == "__main__":
     main()
-
