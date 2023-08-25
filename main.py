@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import math
 import numpy as np
 import pandas as pd
@@ -24,7 +23,7 @@ def main():
         st.header(menu[0])
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
-        beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
+                beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
         eta = st.number_input('Parâmetro de escala (eta)', value=100.0, step=10.0, format='%.1f')
         lbda= st.number_input('Taxa de Chegada de Oportunidade (Lambda)', value=2.0, step=0.1, format='%.1f')
         cp = st.number_input('Custo de Substituição Preventiva em T(programado):', value=100.0, step=10.0, format='%.1f') #FEITO
@@ -36,7 +35,6 @@ def main():
         
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
-        
         botao = st.button("Obtenha os valores")
         if botao: 
             def fx(x): 
@@ -47,16 +45,15 @@ def main():
             def Rx(x): 
                 return 1 - Fx(x)
                     
-# parte que não entendi muito bem 
-# tempo entre oportunidades 
             def fh(h):
                 return lbda*np.exp(-(lbda*h))
             def Fh(h):
                 return 1 - np.exp(-(lbda*h)) 
             def Rh(h): 
                 return 1- Fh(h) 
-            def objetivo(y):
-                    S, T, Z = y  
+
+        def objetivo(y):
+            S, T, Z = y  # Corrigindo a desestruturação das variáveis
     #CASO 1
             def P1(S):
                 return Fx(S)
@@ -137,15 +134,16 @@ cons=[c1, c2]
 bx0=[0.1,50]
 bx1=[0.1,50]
 bx2=[0.1,50]
-    ret = minimize(objetivo, x0, method='SLSQP', bounds=[bx0, bx1, bx2], constraints=cons)
-    S, T, Z = ret.x[0], ret.x[1], ret.x[2]
-st.write('S = :', S)
-st.write('T = :', T)
-st.write('Z = :', Z)
-st.write('Taxa de custo = :', ret.fun)
-    
 
-def MTBOF(S,T,Z):
+        ret = minimize(objetivo, x0, method='SLSQP', bounds=[bx0, bx1, bx2], constraints=cons)
+        S, T, Z = ret.x[0], ret.x[1], ret.x[2]
+
+        st.write('S = :', S)
+        st.write('T = :', T)
+        st.write('Z = :', Z)
+        st.write('Taxa de custo = :', ret.fun)  # Corrigindo o nome da variável
+        
+        def MTBOF(S,T,Z):
     #CASO 1
     def P1(S):
         return Fx(S)
@@ -210,8 +208,6 @@ def MTBOF(S,T,Z):
     return MTBOF    
 
 st.write('MTBOF:', MTFBOF(S,T,Z))
-
-
 if choice == menu[1]:
     st.header(menu[1])
     st.write('''Fazer o texto para colocar aqui''')
@@ -223,11 +219,12 @@ if choice == menu[2]:
     operation modelling. Learn more about it through our website.''')
     st.markdown('[Click here to be redirected to our website](http://random.org.br/en/)', False)
 
-if st._is_running_with_streamlit:
+    if st._is_running_with_streamlit:
         main()
-else:
-    sys.argv = ["streamlit", "run", sys.argv[0]]
-    sys.exit(stcli.main())
+    else:
+        sys.argv = ["streamlit", "run", sys.argv[0]]
+        sys.exit(stcli.main())
 
 if __name__ == "__main__":
     main()
+
