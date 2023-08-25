@@ -1,34 +1,27 @@
 # -*- coding: utf-8 -*-
 
 import math
-import numpy as np 
+import numpy as np
 import pandas as pd
-from scipy.integrate import quad, dblquad, tplquad
+from scipy.integrate import quad, dblquad
 from scipy.optimize import minimize
 import streamlit as st
 import sys
 from streamlit import cli as stcli
 from PIL import Image
-from scipy.optimize import minimize
-
 
 def main():
-    #criando 3 colunas
     col1, col2, col3 = st.columns(3)
     foto = Image.open('foto.png')
-    #inserindo na coluna 2
     col2.image(foto, use_column_width=True)
-    
+
     st.title('Política de Substituição Preventiva com Oportunidade e Prorrogação')
 
     menu = ["Aplicação", "Informação", "Website"]
-    
     choice = st.sidebar.selectbox("Selecione aqui", menu)
     
     if choice == menu[0]:
-        
         st.header(menu[0])
-
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
         beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
@@ -63,9 +56,7 @@ def main():
             def Rh(h): 
                 return 1- Fh(h) 
             def objetivo(y):
-                S=y[0]
-                T=y[1] 
-                Z=y[2]
+            S, T, Z = y  
     #CASO 1
             def P1(S):
                 return Fx(S)
@@ -146,15 +137,13 @@ cons=[c1, c2]
 bx0=[0.1,50]
 bx1=[0.1,50]
 bx2=[0.1,50]
-ret=minimize(objetivo, x0, method='SLSQP', bounds=[bx0,bx1,bx2], constraints=cons)
-S=ret.x[0]
-T=ret.x[1]
-Z=ret.x[2]     
+ret = minimize(objetivo, x0, method='SLSQP', bounds=[bx0, bx1, bx2], constraints=cons)
+S, T, Z = ret.x[0], ret.x[1], ret.x[2]
 st.write('S = :', S)
 st.write('T = :', T)
 st.write('Z = :', Z)
-st.write('Taxa de custo = :', rest.fun)
-
+st.write('Taxa de custo = :', ret.fun)
+    
 
 def MTBOF(S,T,Z):
     #CASO 1
@@ -235,7 +224,10 @@ if choice == menu[2]:
     st.markdown('[Click here to be redirected to our website](http://random.org.br/en/)', False)
 
 if st._is_running_with_streamlit:
-    main()
+        main()
 else:
     sys.argv = ["streamlit", "run", sys.argv[0]]
     sys.exit(stcli.main())
+
+if __name__ == "__main__":
+    main()
