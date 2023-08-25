@@ -56,7 +56,7 @@ def main():
             def Rh(h): 
                 return 1- Fh(h) 
             def objetivo(y):
-            S, T, Z = y  
+                    S, T, Z = y  
     #CASO 1
             def P1(S):
                 return Fx(S)
@@ -137,8 +137,8 @@ cons=[c1, c2]
 bx0=[0.1,50]
 bx1=[0.1,50]
 bx2=[0.1,50]
-ret = minimize(objetivo, x0, method='SLSQP', bounds=[bx0, bx1, bx2], constraints=cons)
-S, T, Z = ret.x[0], ret.x[1], ret.x[2]
+    ret = minimize(objetivo, x0, method='SLSQP', bounds=[bx0, bx1, bx2], constraints=cons)
+    S, T, Z = ret.x[0], ret.x[1], ret.x[2]
 st.write('S = :', S)
 st.write('T = :', T)
 st.write('Z = :', Z)
