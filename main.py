@@ -24,15 +24,15 @@ def main():
         st.header(menu[0])
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
-        beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
-        eta = st.number_input('Parâmetro de escala (eta)', value=100.0, step=10.0, format='%.1f')
-        lbda= st.number_input('Taxa de Chegada de Oportunidade (Lambda)', value=2.0, step=0.1, format='%.1f')
-        cp = st.number_input('Custo de Substituição Preventiva em T(programado):', value=100.0, step=10.0, format='%.1f') #FEITO
-        cv = st.number_input('Custo de Substituição Preventiva em Z:', value=100.0, step=10.0, format='%.1f')
-        co = st.number_input('Custo de Substituição Preventiva em Oportunidade:', value=100.0, step=10.0, format='%.1f') #FEITO
-        cf = st.number_input('Custo da manutenção corretiva:', min_value=0.01, step=0.01) #FEITO
-        cw = st.number_input('substituição oportuna entre T e Z:', value=100.0, step=10.0, format='%.1f')
-        p = st.number_input('#Probabilidade de Impedimento:', min_value=0.01, step=0.01)
+        beta = st.number_input('Parâmetro de forma (beta)', value=5, step=2, format='%.1f')
+        eta = st.number_input('Parâmetro de escala (eta)', value=4, step=3, format='%.1f')
+        lbda= st.number_input('Taxa de Chegada de Oportunidade (Lambda)', value=4, step=0, format='%.1f')
+        cp = st.number_input('Custo de Substituição Preventiva em T(programado):', value=1, format='%.1f') #FEITO
+        cv = st.number_input('Custo de Substituição Preventiva em Z:', value=3, step=1, format='%.1f')
+        co = st.number_input('Custo de Substituição Preventiva em Oportunidade:', value=0.25, step=1, format='%.1f') #FEITO
+        cf = st.number_input('Custo da manutenção corretiva:', min_value=10, step=2.5) #FEITO
+        cw = st.number_input('substituição oportuna entre T e Z:', value=1, step=0.25, format='%.1f')
+        p = st.number_input('#Probabilidade de Impedimento:', min_value=0, step=0.2)
         
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
