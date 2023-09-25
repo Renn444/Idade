@@ -119,6 +119,31 @@ def main():
                 TAXA_CUSTO=SOMA_CUST/SOMA_VIDA
                 return TAXA_CUSTO
             
+
+            x0 = [0.9, 1.0, 2.0]
+
+            def cond1(y):
+                return y[1]-y[0] # T >= S
+
+            def cond2(y):
+                return y[2]-y[1] # Z >= T
+
+            c1 = {'type': 'ineq', 'fun': cond1}
+            c2 = {'type': 'ineq', 'fun': cond2}
+
+            cons = [c1, c2]
+
+            bx0 = [0.1, 50]
+            bx1 = [0.1, 50]
+            bx2 = [0.1, 50]
+
+            ret = minimize(objetivo, x0, method='SLSQP', bounds=[bx0, bx1, bx2], constraints=cons)
+            S, T, Z = ret.x[0], ret.x[1], ret.x[2]
+
+            st.write('S = :', S)
+            st.write('T = :', T)
+            st.write('Z = :', Z)
+            st.write('Taxa de custo = :', ret.fun)  # Corrigindo o nome da variável
                 # Função MTBOF anterior
             def MTBOF(S,T,Z):
                 def P1(S):
@@ -182,31 +207,6 @@ def main():
                     MTBOF = SOMA_PROB_FALHAS / SOMA_VIDA
                     return MTBOF
                     pass
-
-            x0 = [0.9, 1.0, 2.0]
-
-            def cond1(y):
-                return y[1]-y[0] # T >= S
-
-            def cond2(y):
-                return y[2]-y[1] # Z >= T
-
-            c1 = {'type': 'ineq', 'fun': cond1}
-            c2 = {'type': 'ineq', 'fun': cond2}
-
-            cons = [c1, c2]
-
-            bx0 = [0.1, 50]
-            bx1 = [0.1, 50]
-            bx2 = [0.1, 50]
-
-            ret = minimize(objetivo, x0, method='SLSQP', bounds=[bx0, bx1, bx2], constraints=cons)
-            S, T, Z = ret.x[0], ret.x[1], ret.x[2]
-
-            st.write('S = :', S)
-            st.write('T = :', T)
-            st.write('Z = :', Z)
-            st.write('Taxa de custo = :', ret.fun)  # Corrigindo o nome da variável
             st.write('MTBOF:', MTBOF(S,T,Z))
             
     if choice == menu[1]:
