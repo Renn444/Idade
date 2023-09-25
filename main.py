@@ -212,7 +212,6 @@ def main():
             st.write('MTBOF:', MTBOF(S,T,Z))
     
             resultado_iteracao = {  # Crie um dicionário para armazenar os resultados de uma iteração
-                'Ite': i,
                 'eta': eta,
                 'beta': beta,
                 'lbda': lbda,
