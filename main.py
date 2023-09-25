@@ -38,6 +38,7 @@ def main():
         
         botao = st.button("Obtenha os valores")
         if botao: 
+            resultados = [] 
             # Definições das funções
             def fx(x): 
                 f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta) 
@@ -209,11 +210,31 @@ def main():
             pass
 
             st.write('MTBOF:', MTBOF(S,T,Z))
+    
+            resultado_iteracao = {  # Crie um dicionário para armazenar os resultados de uma iteração
+                'Ite': i,
+                'eta': eta,
+                'beta': beta,
+                'lbda': lbda,
+                'p': p,
+                'co': co,
+                'cp': cp,
+                'cv': cv,
+                'cw': cw,
+                'cf': cf,
+                'taxa': CR,
+                'S': S,
+                'T': T,
+                'Z': Z
+            }
+        
+            resultados.append(resultado_iteracao)  # Adicione os resultados à lista
             resultados_df = pd.DataFrame(resultados)
             media = resultados_df['taxa'].mean()
             desvio_padrao = resultados_df['taxa'].std()
             st.write(f'Média da Taxa de Custo: {media}')
             st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}')
+
     if choice == menu[1]:
         st.header(menu[1])
         st.write('''Fazer o texto para colocar aqui''')
