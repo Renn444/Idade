@@ -223,7 +223,7 @@ def main():
         
             MTBOF = SOMA_PROB_FALHAS / SOMA_VIDA
             return MTBOF
-            st.write('MTBOF:', MTBOF(S,T,Z))
+        st.write('MTBOF:', MTBOF(S,T,Z))
             
     if choice == menu[1]:
         st.header(menu[1])
