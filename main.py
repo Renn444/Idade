@@ -201,12 +201,12 @@ def main():
                 def V7(S,T,Z):
                     return Z*P7(S, T, Z)
 
-                    SOMA_PROB_FALHAS = P1(S) + P2(S, T) + P3(S, T, Z)
-                    SOMA_VIDA = V1(S) + V2(S, T) + V3(S, T, Z) + V4(S, T) + V5(S, T, Z) + V6(S, T) + V7(S, T, Z)
+                SOMA_PROB_FALHAS = P1(S) + P2(S, T) + P3(S, T, Z)
+                SOMA_VIDA = V1(S) + V2(S, T) + V3(S, T, Z) + V4(S, T) + V5(S, T, Z) + V6(S, T) + V7(S, T, Z)
 
-                    MTBOF = SOMA_PROB_FALHAS / SOMA_VIDA
-                    return MTBOF
-                    pass
+                MTBOF = SOMA_PROB_FALHAS / SOMA_VIDA
+                return MTBOF
+            pass
 
             st.write('MTBOF:', MTBOF(S,T,Z))
             
