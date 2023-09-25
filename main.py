@@ -24,7 +24,7 @@ def main():
         st.header(menu[0])
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
-        beta = st.number_input('Parâmetro de forma (beta)', value=3, step=0.1, format='%.1f')
+        beta = st.number_input('Parâmetro de forma (beta)', value=3.0, step=0.1, format='%.1f')
         eta = st.number_input('Parâmetro de escala (eta)', value=100.0, step=10.0, format='%.1f')
         lbda= st.number_input('Taxa de Chegada de Oportunidade (Lambda)', value=2.0, step=0.1, format='%.1f')
         cp = st.number_input('Custo de Substituição Preventiva em T(programado):', value=100.0, step=10.0, format='%.1f') #FEITO
