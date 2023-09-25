@@ -210,7 +210,7 @@ def main():
             pass
 
             st.write('MTBOF:', MTBOF(S,T,Z))
-    
+            CR=ret.fun
             resultado_iteracao = {  # Crie um dicionário para armazenar os resultados de uma iteração
                 'eta': eta,
                 'beta': beta,
