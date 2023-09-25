@@ -39,6 +39,7 @@ def main():
         botao = st.button("Obtenha os valores")
         if botao: 
             resultados = [] 
+            for _ in range(Runs):
             # Definições das funções
             def fx(x): 
                 f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta) 
