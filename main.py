@@ -36,20 +36,21 @@ def main():
         
         botao = st.button("Obtenha os valores")
         if botao: 
-            def fx(x): 
-                f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta) 
-                return f 
-            def Fx(x):
-                return 1 - np.exp(-(x/eta)**beta) 
-            def Rx(x): 
+            def fx(x):
+                f = (beta / eta) * ((x / eta) ** (beta - 1)) * np.exp(-(x / eta) ** beta)
+                return f
+
+            def Rx(x):
                 return 1 - Fx(x)
-                    
+
             def fh(h):
-                return lbda*np.exp(-(lbda*h))
+                return lbda * np.exp(-(lbda * h))
+
             def Fh(h):
-                return 1 - np.exp(-(lbda*h)) 
-            def Rh(h): 
-                return 1- Fh(h) 
+                return 1 - np.exp(-(lbda * h))
+
+            def Rh(h):
+                return 1 - Fh(h)
 
         def objetivo(y):
             S, T, Z = y  # Corrigindo a desestruturação das variáveis
