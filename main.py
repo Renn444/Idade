@@ -226,8 +226,6 @@ def main():
                 'T': T,
                 'Z': Z
             }
-        
-            resultados.append(resultado_iteracao)  # Adicione os resultados à lista
             resultados_df = pd.DataFrame(resultados)
             media = resultados_df['taxa'].mean()
             desvio_padrao = resultados_df['taxa'].std()
