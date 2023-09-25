@@ -209,7 +209,11 @@ def main():
             pass
 
             st.write('MTBOF:', MTBOF(S,T,Z))
-            
+            resultados_df = pd.DataFrame(resultados)
+            media = resultados_df['taxa'].mean()
+            desvio_padrao = resultados_df['taxa'].std()
+            st.write(f'Média da Taxa de Custo: {media}')
+            st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}')
     if choice == menu[1]:
         st.header(menu[1])
         st.write('''Fazer o texto para colocar aqui''')
