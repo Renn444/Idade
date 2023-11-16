@@ -231,8 +231,6 @@ def main():
             resultados_df = pd.DataFrame(resultados)
             media = resultados_df['taxa'].mean()
             desvio_padrao = resultados_df['taxa'].std()
-            st.write(f'Média da Taxa de Custo: {media}')
-            st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}')
             if np.isnan(desvio_padrao):
                 st.write("Não há variabilidade nos dados para calcular o desvio padrão.")
             else:
