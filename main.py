@@ -30,7 +30,7 @@ def main():
         cp = st.number_input('Custo de Substituição Preventiva em T(programado):', value=2.0, step=0.1, format='%.1f', min_value=1.0, max_value=10.0 ) 
         cv = st.number_input('Custo de Substituição Preventiva em Z:', value=2.0, step=0.1, format='%.1f', min_value=1.0, max_value=3.0)
         co = st.number_input('Custo de Substituição Preventiva em Oportunidade:', value=2.0, step=0.1, format='%.1f', min_value=0.25, max_value=1.0) 
-        cf = st.number_input('Custo da manutenção corretiva:', value=2.0, step=0.1, format='%.1f', min_value=2.5, max_value=5.0 min_value=1.0) 
+        cf = st.number_input('Custo da manutenção corretiva:', value=2.0, step=0.1, format='%.1f', min_value=2.5, max_value=5.0) 
         cw = st.number_input('substituição oportuna entre T e Z:',  value=2.0, step=0.1, format='%.1f', min_value=0.25, max_value=1.0)
         p = st.number_input('#Probabilidade de Impedimento:', value=2.0, step=0.1, format='%.1f', min_value=0.0, max_value=0.2)
         
