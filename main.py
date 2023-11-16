@@ -237,6 +237,12 @@ def main():
                 st.write(f'Média da Taxa de Custo: {media}')
                 st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}'
 
+            if np.isnan(desvio_padrao):
+                st.write("Não há variabilidade nos dados para calcular o desvio padrão.")
+            else:
+                st.write(f'Média da Taxa de Custo: {media}')
+                st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}')
+
     if choice == menu[1]:
         st.header(menu[1])
         st.write('''Fazer o texto para colocar aqui''')
