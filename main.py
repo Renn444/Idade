@@ -25,14 +25,15 @@ def main():
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
         beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f', min_value=1.0, max_value=5.0)
-        eta = st.number_input('Parâmetro de escala (eta)', value=2.0, step=0.1, format='%.1f', min_value=3.0, max_value=4.0)
+        eta = st.number_input('Parâmetro de escala (eta)', value=2.0, step=0.1, format='%.1f', min_value=3.0, max_value=4.0)    
         lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)', value=2.0, step=0.1, format='%.1f', min_value=0.0, max_value=4.0)
         cp = st.number_input('Custo de Substituição Preventiva em T(programado):', value=2.0, step=0.1, format='%.1f', min_value=1.0, max_value=10.0 ) 
         cv = st.number_input('Custo de Substituição Preventiva em Z:', value=2.0, step=0.1, format='%.1f', min_value=1.0, max_value=3.0)
         co = st.number_input('Custo de Substituição Preventiva em Oportunidade:', value=2.0, step=0.1, format='%.1f', min_value=0.25, max_value=1.0) 
         cf = st.number_input('Custo da manutenção corretiva:', value=2.0, step=0.1, format='%.1f', min_value=2.5, max_value=5.0) 
-        cw = st.number_input('substituição oportuna entre T e Z:',  value=2.0, step=0.1, format='%.1f', min_value=0.25, max_value=1.0)
+        cw = st.number_input('Substituição oportuna entre T e Z:',  value=2.0, step=0.1, format='%.1f', min_value=0.25, max_value=1.0)
         p = st.number_input('#Probabilidade de Impedimento:', value=2.0, step=0.1, format='%.1f', min_value=0.0, max_value=0.2)
+
         
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
