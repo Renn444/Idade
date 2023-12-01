@@ -24,9 +24,10 @@ def main():
         st.header(menu[0])
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
-        beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f', min_value=1.0, max_value=5.0)
-        eta = st.number_input('Parâmetro de escala (eta)', value=3.0, step=0.1, format='%.1f', min_value=3.0, max_value=4.0)    
-        lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)', value=2.0, step=0.1, format='%.1f', min_value=0.0, max_value=4.0)
+        #beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
+        beta = st.number_input('Parâmetro de forma (beta)')
+        eta = st.number_input('Parâmetro de escala (eta)', value=3.0, step=0.1, format='%.1f')    
+        lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)', value=2.0, step=0.1, format='%.1f')
         cp = st.number_input('Custo de Substituição Preventiva em T(programado):', value=1.0, step=0.1, format='%.1f', min_value=1.0, max_value=10.0 ) 
         cv = st.number_input('Custo de Substituição Preventiva em Z:', value=2.0, step=0.1, format='%.1f', min_value=1.0, max_value=3.0)
         co = st.number_input('Custo de Substituição Preventiva em Oportunidade:', value=0.25, step=0.1, format='%.1f', min_value=0.25, max_value=1.0) 
@@ -206,11 +207,11 @@ def main():
                 SOMA_PROB_FALHAS = P1(S) + P2(S, T) + P3(S, T, Z)
                 SOMA_VIDA = V1(S) + V2(S, T) + V3(S, T, Z) + V4(S, T) + V5(S, T, Z) + V6(S, T) + V7(S, T, Z)
 
-                MTBOF = SOMA_PROB_FALHAS / SOMA_VIDA
+                MTBOF = SOMA_VIDA / SOMA_PROB_FALHAS
                 return MTBOF
             pass
 
-            st.write('MTBOF:', MTBOF(S,T,Z))
+            st.write('Tempo médio entre falhas operacionais:', MTBOF(S,T,Z))
             CR=ret.fun
             resultado_iteracao = {  # Crie um dicionário para armazenar os resultados de uma iteração
                 'eta': eta,
