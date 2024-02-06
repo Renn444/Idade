@@ -24,6 +24,7 @@ def main():
         st.header(menu[0])
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
+        #beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
         beta = st.number_input('Parâmetro de forma (beta)')
         eta = st.number_input('Parâmetro de escala (eta)')    
         lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
@@ -33,6 +34,7 @@ def main():
         cf = st.number_input('Custo da manutenção corretiva:') 
         cw = st.number_input('Substituição oportuna entre T e Z:')
         p = st.number_input('#Probabilidade de Impedimento:')
+
         
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
@@ -205,11 +207,11 @@ def main():
                 SOMA_PROB_FALHAS = P1(S) + P2(S, T) + P3(S, T, Z)
                 SOMA_VIDA = V1(S) + V2(S, T) + V3(S, T, Z) + V4(S, T) + V5(S, T, Z) + V6(S, T) + V7(S, T, Z)
 
-                MTBOF = SOMA_PROB_FALHAS / SOMA_VIDA
+                MTBOF = SOMA_VIDA / SOMA_PROB_FALHAS
                 return MTBOF
             pass
 
-            st.write('MTBOF:', MTBOF(S,T,Z))
+            st.write('Tempo médio entre falhas operacionais:', MTBOF(S,T,Z))
             CR=ret.fun
             resultado_iteracao = {  # Crie um dicionário para armazenar os resultados de uma iteração
                 'eta': eta,
@@ -230,8 +232,16 @@ def main():
             resultados_df = pd.DataFrame(resultados)
             media = resultados_df['taxa'].mean()
             desvio_padrao = resultados_df['taxa'].std()
-            st.write(f'Média da Taxa de Custo: {media}')
-            st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}')
+            resultados.append(resultado_iteracao)
+            resultados_df = pd.DataFrame(resultados)
+            media = resultados_df['taxa'].mean()
+            desvio_padrao = resultados_df['taxa'].std()
+
+            if np.isnan(desvio_padrao):
+                st.write("Não há variabilidade nos dados para calcular o desvio padrão.")
+            else:
+                st.write(f'Média da Taxa de Custo: {media}')
+                st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}')
 
     if choice == menu[1]:
         st.header(menu[1])
