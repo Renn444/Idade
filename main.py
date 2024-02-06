@@ -24,17 +24,15 @@ def main():
         st.header(menu[0])
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
-        #beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
-        beta = st.number_input('Parâmetro de forma (beta)')
-        eta = st.number_input('Parâmetro de escala (eta)')    
-        lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
-        cp = st.number_input('Custo de Substituição Preventiva em T(programado):') 
-        cv = st.number_input('Custo de Substituição Preventiva em Z:')
-        co = st.number_input('Custo de Substituição Preventiva em Oportunidade:') 
-        cf = st.number_input('Custo da manutenção corretiva:') 
-        cw = st.number_input('Substituição oportuna entre T e Z:')
-        p = st.number_input('#Probabilidade de Impedimento:')
-
+        beta = st.number_input('Parâmetro de forma (beta)', value=np.random.uniform(2, 5), step=0.1, format='%.1f')
+        eta = st.number_input('Parâmetro de escala (eta)', value=np.random.uniform(3, 4), step=0.1, format='%.1f')
+        lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)', value=np.random.uniform(0, 4), step=0.1, format='%.1f')
+        cp = st.number_input('Custo de Substituição Preventiva em T(programado):', value=1.0, step=10.0, format='%.1f') #FEITO
+        cv = st.number_input('Custo de Substituição Preventiva em Z:', value=np.random.uniform(1, 3), step=10.0, format='%.1f')
+        co = st.number_input('Custo de Substituição Preventiva em Oportunidade:', value=np.random.uniform(0.25, 1), step=10.0, format='%.1f') #FEITO
+        cf = st.number_input('Custo da manutenção corretiva:', min_value=0.01, step=0.01, value=np.random.uniform(2.5, 10)) #FEITO
+        cw = st.number_input('substituição oportuna entre T e Z:', value=np.random.uniform(0.25, 1), step=10.0, format='%.1f')
+        p = st.number_input('#Probabilidade de Impedimento:', min_value=0.01, step=0.01, value=np.random.uniform(0, 0.2))
         
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
@@ -207,11 +205,11 @@ def main():
                 SOMA_PROB_FALHAS = P1(S) + P2(S, T) + P3(S, T, Z)
                 SOMA_VIDA = V1(S) + V2(S, T) + V3(S, T, Z) + V4(S, T) + V5(S, T, Z) + V6(S, T) + V7(S, T, Z)
 
-                MTBOF = SOMA_VIDA / SOMA_PROB_FALHAS
+                MTBOF = SOMA_PROB_FALHAS / SOMA_VIDA
                 return MTBOF
             pass
 
-            st.write('Tempo médio entre falhas operacionais:', MTBOF(S,T,Z))
+            st.write('MTBOF:', MTBOF(S,T,Z))
             CR=ret.fun
             resultado_iteracao = {  # Crie um dicionário para armazenar os resultados de uma iteração
                 'eta': eta,
@@ -232,16 +230,8 @@ def main():
             resultados_df = pd.DataFrame(resultados)
             media = resultados_df['taxa'].mean()
             desvio_padrao = resultados_df['taxa'].std()
-            resultados.append(resultado_iteracao)
-            resultados_df = pd.DataFrame(resultados)
-            media = resultados_df['taxa'].mean()
-            desvio_padrao = resultados_df['taxa'].std()
-
-            if np.isnan(desvio_padrao):
-                st.write("Não há variabilidade nos dados para calcular o desvio padrão.")
-            else:
-                st.write(f'Média da Taxa de Custo: {media}')
-                st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}')
+            st.write(f'Média da Taxa de Custo: {media}')
+            st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}')
 
     if choice == menu[1]:
         st.header(menu[1])
@@ -256,6 +246,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
