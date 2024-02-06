@@ -273,7 +273,7 @@ if choice == menu[1]:
         
         botao = st.button("Obtenha os valores")
         if botao: 
-            #resultados = []             
+            resultados = []             
             Lista_test= []
             for i in range(0, 400):
                 beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
