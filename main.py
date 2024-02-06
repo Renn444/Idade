@@ -265,9 +265,9 @@ def main():
         cfimprec = st.number_input('Imprecisão do Custo da manutenção corretiva:') 
         cwimprec = st.number_input('Imprecisão da Substituição oportuna entre T e Z:')
         pimpre = st.number_input('Imprecisão da Probabilidade de Impedimento:')
-        S = st.number_input('Parâmetro de forma (beta)')
-        T= st.number_input('Parâmetro de escala (eta)')    
-        Z= st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
+        S = st.number_input('Valor de S:')
+        T= st.number_input('Valor T:')    
+        Z= st.number_input('Valor de Z:')
         y = (S, T, Z)
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
