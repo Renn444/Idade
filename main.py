@@ -243,59 +243,62 @@ def main():
                 st.write(f'Média da Taxa de Custo: {media}')
                 st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}')
 
-    if choice == menu[1]:
-        st.header(menu[1])
-        st.write('''Fazer o texto para colocar aqui''')
-        Beta = st.number_input('Parâmetro de forma (beta)')
-        Eta = st.number_input('Parâmetro de escala (eta)')    
-        Lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
-        Cp = st.number_input('Custo de Substituição Preventiva em T(programado):') 
-        Cv = st.number_input('Custo de Substituição Preventiva em Z:')
-        Co = st.number_input('Custo de Substituição Preventiva em Oportunidade:') 
-        Cf = st.number_input('Custo da manutenção corretiva:') 
-        Cw = st.number_input('Substituição oportuna entre T e Z:')
-        P = st.number_input('Probabilidade de Impedimento:')
-         
-        betaimprec = st.number_input('Imprecisão do Parâmetro de forma (beta)')
-        etaetaimprec = st.number_input('Imprecisão do Parâmetro de escala (eta)')    
-        lbdaimprec = st.number_input('Imprecisão da Taxa de Chegada de Oportunidade (Lambda)')
-        cpimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em T(programado):') 
-        cvimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em Z:')
-        coimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em Oportunidade:') 
-        cfimprec = st.number_input('Imprecisão do Custo da manutenção corretiva:') 
-        cwimprec = st.number_input('Imprecisão da Substituição oportuna entre T e Z:')
-        pimpre = st.number_input('Imprecisão da Probabilidade de Impedimento:')
-        S = st.number_input('Valor de S:')
-        T= st.number_input('Valor T:')    
-        Z= st.number_input('Valor de Z:')
-        y = (S, T, Z)
-        st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
+if choice == menu[1]:
+    st.header(menu[1])
+    st.write('''Fazer o texto para colocar aqui''')
+
+    Beta = st.number_input('Parâmetro de forma (beta)')
+    Eta = st.number_input('Parâmetro de escala (eta)')    
+    Lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
+    Cp = st.number_input('Custo de Substituição Preventiva em T(programado):') 
+    Cv = st.number_input('Custo de Substituição Preventiva em Z:')
+    Co = st.number_input('Custo de Substituição Preventiva em Oportunidade:') 
+    Cf = st.number_input('Custo da manutenção corretiva:') 
+    Cw = st.number_input('Substituição oportuna entre T e Z:')
+    P = st.number_input('Probabilidade de Impedimento:')
+     
+    betaimprec = st.number_input('Imprecisão do Parâmetro de forma (beta)')
+    etaimprec = st.number_input('Imprecisão do Parâmetro de escala (eta)')    
+    lbdaimprec = st.number_input('Imprecisão da Taxa de Chegada de Oportunidade (Lambda)')
+    cpimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em T(programado):') 
+    cvimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em Z:')
+    coimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em Oportunidade:') 
+    cfimprec = st.number_input('Imprecisão do Custo da manutenção corretiva:') 
+    cwimprec = st.number_input('Imprecisão da Substituição oportuna entre T e Z:')
+    pimpre = st.number_input('Imprecisão da Probabilidade de Impedimento:')
+    S = st.number_input('Valor de S:')
+    T = st.number_input('Valor T:')    
+    Z = st.number_input('Valor de Z:')
+    y = (S, T, Z)
+    st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
+    
+    botao = st.button("Obtenha os valores")
+    if botao: 
+        # resultados = []             
+        Lista_test = []
+        for i in range(0, 400):
+            beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
+            eta = random.uniform(Eta * (1 - etaimprec), Eta * (1 + etaimprec))
+            lbda = random.uniform(Lbda * (1 - lbdaimprec), Lbda * (1 + lbdaimprec))
+            cp = random.uniform(Cp * (1 - cpimprec), Cp * (1 + cpimprec))
+            cv = random.uniform(Cv * (1 - cvimprec), Cv * (1 + cvimprec))
+            co = random.uniform(Co * (1 - coimprec), Co * (1 + coimprec))
+            cf = random.uniform(Cf * (1 - cfimprec), Cf * (1 + cfimprec))
+            cw = random.uniform(Cw * (1 - cwimprec), Cw * (1 + cwimprec))
+            p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))
         
-        botao = st.button("Obtenha os valores")
-        if botao: 
-            #resultados = []             
-            Lista_test= []
-            for i in range(0, 400):
-                beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
-                eta = random.uniform(Eta * (1 - etaimprec), Eta * (1 + etaimprec))
-                lbda = random.uniform(Lbda * (1 - lbdaimprec), Lbda * (1 + lbdaimprec))
-                cp = random.uniform(Cp * (1 - cpimprec), Cp * (1 + cpimprec))
-                cv = random.uniform(Cv * (1 - cvimprec), Cv * (1 + cvimprec))
-                co = random.uniform(Co * (1 - coimprec), Co * (1 + coimprec))
-                cf = random.uniform(Cf * (1 - cfimprec), Cf * (1 + cfimprec))
-                cw = random.uniform(Cw * (1 - cwimprec), Cw * (1 + cwimprec))
-                p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))
-            
-                cr = objetivo(y)
-                Lista_test.append(cr)
-                print("Média :", sum(Lista_test)/len(Lista_test))
-                print('Devios Padrão:', np.std(Lista_test))
-                
-                # Criar box-plot
-                plt.boxplot(Lista_test)
-                plt.title('Box-Plot da Taxa de Custo')
-                plt.ylabel('Taxa de Custo')
-                plt.show()
+            # Corrigir a chamada da função objetivo passando uma lista de parâmetros
+            cr = objetivo([beta, eta, lbda, cp, cv, co, cf, cw, p], y)
+            Lista_test.append(cr)
+        
+        print("Média :", sum(Lista_test)/len(Lista_test))
+        print('Desvio Padrão:', np.std(Lista_test))
+        
+        # Criar box-plot
+        plt.boxplot(Lista_test)
+        plt.title('Box-Plot da Taxa de Custo')
+        plt.ylabel('Taxa de Custo')
+        plt.show()
 
     if choice == menu[2]:
         st.header(menu[2])
