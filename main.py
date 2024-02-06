@@ -253,62 +253,9 @@ def main():
         in order to bring together different researchers who work in the following areas: risk, maintenance and 
         operation modelling. Learn more about it through our website.''')
         st.markdown('[Click here to be redirected to our website](http://random.org.br/en/)', False)
-   
-    if st.button("Calcular Valores Aleatórios"):
-        st.subheader("Cálculo de Valores Aleatórios")
-
-    if st.button("Calcular Valores Aleatórios"):
-        st.subheader("Cálculo de Valores Aleatórios")
-
-        # Campos de entrada para os parâmetros
-        Beta = st.number_input("Parâmetro Beta", value=2.0, step=0.1)
-        Eta = st.number_input("Parâmetro Eta", value=1.0, step=0.1)
-        Lbda = st.number_input("Parâmetro Lambda", value=5.0, step=0.1)
-        Cp = st.number_input("Custo Cp", value=4.0, step=0.1)
-        Cv = st.number_input("Custo Cv", value=3.0, step=0.1)
-        Co = st.number_input("Custo Co", value=2.0, step=0.1)
-        Cf = st.number_input("Custo Cf", value=1.0, step=0.1)
-        Cw = st.number_input("Custo Cw", value=2.0, step=0.1)
-        P = st.number_input("Probabilidade P", value=0.5, step=0.1)
-
-        # Campos de entrada para os parâmetros de imprecisão
-        betaimprec = st.number_input("Imprecisão Beta", value=0.1, step=0.01)
-        etaimprec = st.number_input("Imprecisão Eta", value=0.2, step=0.01)
-        lbdaimprec = st.number_input("Imprecisão Lambda", value=0.3, step=0.01)
-        cpimprec = st.number_input("Imprecisão Custo Cp", value=0.1, step=0.01)
-        cvimprec = st.number_input("Imprecisão Custo Cv", value=0.2, step=0.01)
-        coimprec = st.number_input("Imprecisão Custo Co", value=0.1, step=0.01)
-        cfimprec = st.number_input("Imprecisão Custo Cf", value=0.3, step=0.01)
-        cwimprec = st.number_input("Imprecisão Custo Cw", value=0.4, step=0.01)
-        pimpre = st.number_input("Imprecisão Probabilidade P", value=0.5, step=0.01)
-
-        y = (3.22, 8.12, 22)  # Valor de Z
-
-        Lista_test = []
-        for i in range(0, 400):
-            beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
-            eta = random.uniform(Eta * (1 - etaimprec), Eta * (1 + etaimprec))
-            lbda = random.uniform(Lbda * (1 - lbdaimprec), Lbda * (1 + lbdaimprec))
-            cp = random.uniform(Cp * (1 - cpimprec), Cp * (1 + cpimprec))
-            cv = random.uniform(Cv * (1 - cvimprec), Cv * (1 + cvimprec))
-            co = random.uniform(Co * (1 - coimprec), Co * (1 + coimprec))
-            cf = random.uniform(Cf * (1 - cfimprec), Cf * (1 + cfimprec))
-            cw = random.uniform(Cw * (1 - cwimprec), Cw * (1 + cwimprec))
-            p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))
-
-            cr = objetivo(y)
-            Lista_test.append(cr)
-
-        st.write("Média da Taxa de Custo:", sum(Lista_test) / len(Lista_test))
-        st.write('Desvio Padrão da Taxa de Custo:', np.std(Lista_test))
-
-        # Criar box-plot
-        st.box_plot(Lista_test)
-        st.title('Box-Plot da Taxa de Custo')
-        st.ylabel('Taxa de Custo')
-        st.show()
 
 if __name__ == "__main__":
     main()
+
 
 
