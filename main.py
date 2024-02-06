@@ -257,26 +257,33 @@ def main():
     if st.button("Calcular Valores Aleatórios"):
         st.subheader("Cálculo de Valores Aleatórios")
 
-         Beta = st.number_input('Parâmetro de forma (beta)')
-         Eta = st.number_input('Parâmetro de escala (eta)')    
-         Lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
-         Cp = st.number_input('Custo de Substituição Preventiva em T(programado):') 
-         Cv = st.number_input('Custo de Substituição Preventiva em Z:')
-         Co = st.number_input('Custo de Substituição Preventiva em Oportunidade:') 
-         Cf = st.number_input('Custo da manutenção corretiva:') 
-         Cw = st.number_input('Substituição oportuna entre T e Z:')
-         P = st.number_input('Probabilidade de Impedimento:')
-         betaimprec = st.number_input('Imprecisão do Parâmetro de forma (beta)')
-         etaetaimprec = st.number_input('Imprecisão do Parâmetro de escala (eta)')    
-         lbdaimprec = st.number_input('Imprecisão da Taxa de Chegada de Oportunidade (Lambda)')
-         cpimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em T(programado):') 
-         cvimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em Z:')
-         coimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em Oportunidade:') 
-         cfimprec = st.number_input('Imprecisão do Custo da manutenção corretiva:') 
-         cwimprec = st.number_input('Imprecisão da Substituição oportuna entre T e Z:')
-         pimpre = st.number_input('Imprecisão da Probabilidade de Impedimento:')
-         y = (3.22, 8.12, 22)  # Valor de Z
-       
+    if st.button("Calcular Valores Aleatórios"):
+        st.subheader("Cálculo de Valores Aleatórios")
+
+        # Campos de entrada para os parâmetros
+        Beta = st.number_input("Parâmetro Beta", value=2.0, step=0.1)
+        Eta = st.number_input("Parâmetro Eta", value=1.0, step=0.1)
+        Lbda = st.number_input("Parâmetro Lambda", value=5.0, step=0.1)
+        Cp = st.number_input("Custo Cp", value=4.0, step=0.1)
+        Cv = st.number_input("Custo Cv", value=3.0, step=0.1)
+        Co = st.number_input("Custo Co", value=2.0, step=0.1)
+        Cf = st.number_input("Custo Cf", value=1.0, step=0.1)
+        Cw = st.number_input("Custo Cw", value=2.0, step=0.1)
+        P = st.number_input("Probabilidade P", value=0.5, step=0.1)
+
+        # Campos de entrada para os parâmetros de imprecisão
+        betaimprec = st.number_input("Imprecisão Beta", value=0.1, step=0.01)
+        etaimprec = st.number_input("Imprecisão Eta", value=0.2, step=0.01)
+        lbdaimprec = st.number_input("Imprecisão Lambda", value=0.3, step=0.01)
+        cpimprec = st.number_input("Imprecisão Custo Cp", value=0.1, step=0.01)
+        cvimprec = st.number_input("Imprecisão Custo Cv", value=0.2, step=0.01)
+        coimprec = st.number_input("Imprecisão Custo Co", value=0.1, step=0.01)
+        cfimprec = st.number_input("Imprecisão Custo Cf", value=0.3, step=0.01)
+        cwimprec = st.number_input("Imprecisão Custo Cw", value=0.4, step=0.01)
+        pimpre = st.number_input("Imprecisão Probabilidade P", value=0.5, step=0.01)
+
+        y = (3.22, 8.12, 22)  # Valor de Z
+
         Lista_test = []
         for i in range(0, 400):
             beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
@@ -300,5 +307,8 @@ def main():
         st.title('Box-Plot da Taxa de Custo')
         st.ylabel('Taxa de Custo')
         st.show()
+
 if __name__ == "__main__":
+    main()
+
 
