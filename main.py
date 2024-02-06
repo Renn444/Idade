@@ -284,14 +284,14 @@ for i in range(0, 400):
 
     cr = objetivo(y)
     Lista_test.append(cr)
-print("Média :", sum(Lista_test)/len(Lista_test))
-print('Devios Padrão:', np.std(Lista_test))
-
-# Criar box-plot
-plt.boxplot(Lista_test)
-plt.title('Box-Plot da Taxa de Custo')
-plt.ylabel('Taxa de Custo')
-plt.show()
+    print("Média :", sum(Lista_test)/len(Lista_test))
+    print('Devios Padrão:', np.std(Lista_test))
+    
+    # Criar box-plot
+    plt.boxplot(Lista_test)
+    plt.title('Box-Plot da Taxa de Custo')
+    plt.ylabel('Taxa de Custo')
+    plt.show()
 
     if choice == menu[2]:
         st.header(menu[2])
