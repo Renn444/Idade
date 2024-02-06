@@ -268,7 +268,7 @@ def main():
         S = st.number_input('Parâmetro de forma (beta)')
         T= st.number_input('Parâmetro de escala (eta)')    
         Z= st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
-        y = (s, t, z)
+        y = (S, T, Z)
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
         botao = st.button("Obtenha os valores")
