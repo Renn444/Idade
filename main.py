@@ -360,11 +360,11 @@ def main():
                 def V7(S,T,Z):
                     return Z*P7(S, T, Z)
                 
-           # SOMA_PROB = P1(S) + P2(S, T) + P3(S, T, Z) + P4(S, T) + P5(S, T, Z) + P6(S, T) + P7(S, T, Z)
-            SOMA_CUST = C1(S) + C2(S, T) + C3(S, T, Z) + C4(S, T) + C5(S, T, Z) + C6(S, T) + C7(S, T, Z)
-            SOMA_VIDA = V1(S) + V2(S, T) + V3(S, T, Z) + V4(S, T) + V5(S, T, Z) + V6(S, T) + V7(S, T, Z)
-
-            TAXA_CUSTO = SOMA_CUST / SOMA_VIDA
+            print(f"SOMA_PROB: {SOMA_PROB}")
+            print(f"SOMA_CUST: {SOMA_CUST}")
+            print(f"SOMA_VIDA: {SOMA_VIDA}")
+            print(f"TAXA_CUSTO: {TAXA_CUSTO}")
+        
             return TAXA_CUSTO
                 
             x0 = [0.9, 1.0,2.0]
