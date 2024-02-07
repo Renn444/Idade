@@ -7,7 +7,8 @@ import streamlit as st
 import sys
 from streamlit import cli as stcli
 from PIL import Image
-import random 
+import random  # Add this line to import the 'random' module
+
 
 # Funções e definições anteriores
 
