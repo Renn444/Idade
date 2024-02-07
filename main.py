@@ -274,7 +274,8 @@ def main():
 
         botao = st.button("Obtenha os valores")
         if botao:
-            resultados = [] #começa aqui
+            resultados = []
+            Lista_test= []#começa aqui
             def fx(x):
                f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta)
                return f
@@ -368,7 +369,6 @@ def main():
             def cond2(y):
                 return y[2]-y[1] #Z>=T
             #termina aqui
-            Lista_test= []
             for i in range(0, 400):
                 beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
                 eta = random.uniform(Eta * (1 - etaimprec), Eta * (1 + etaimprec))
