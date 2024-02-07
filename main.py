@@ -379,7 +379,6 @@ def main():
                 cf = random.uniform(Cf * (1 - cfimprec), Cf * (1 + cfimprec))
                 cw = random.uniform(Cw * (1 - cwimprec), Cw * (1 + cwimprec))
                 p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))
-            
                 cr = objetivo(y)
                 Lista_test.append(cr)
                 st.write("Média da Taxa de Custo:", sum(Lista_test) / len(Lista_test))
