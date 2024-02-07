@@ -294,6 +294,7 @@ def main():
                 return 1- Fh(h) 
             
             def objetivo(y):
+                S, T, Z = y
                 global eta, beta, lbda, p, co, cp, cv, cw, cf
                 
                 S=y[0]
@@ -302,10 +303,12 @@ def main():
                 #CASO 1
                 def P1(S):
                     return Fx(S)
+            
                 def C1(S):
-                    return cf*P1(S)
+                    return cf * P1(S)
+            
                 def V1(S):
-                    return (quad(lambda x: x*fx(x), 0, S)[0])  
+                    return quad(lambda x: x * fx(x), 0, S)[0] 
                 
                 #CASO 2
                 def P2(S,T):
@@ -355,9 +358,12 @@ def main():
                 def V7(S,T,Z):
                     return Z*P7(S, T, Z)
                 
-                # SOMA_PROB=P1(S)+P2(S,T)+P3(S, T, Z)+P4(S, T) + P5(S, T, Z) + P6(S, T)+P7(S, T, Z)
-                SOMA_CUST=C1(S)+C2(S,T)+C3(S, T, Z)+C4(S, T) + C5(S, T, Z) + C6(S, T)+C7(S, T, Z)
-                SOMA_VIDA=V1(S)+V2(S,T)+V3(S, T, Z)+V4(S, T) + V5(S, T, Z) + V6(S, T)+V7(S, T, Z)
+            SOMA_PROB = P1(S) + P2(S, T) + P3(S, T, Z) + P4(S, T) + P5(S, T, Z) + P6(S, T) + P7(S, T, Z)
+            SOMA_CUST = C1(S) + C2(S, T) + C3(S, T, Z) + C4(S, T) + C5(S, T, Z) + C6(S, T) + C7(S, T, Z)
+            SOMA_VIDA = V1(S) + V2(S, T) + V3(S, T, Z) + V4(S, T) + V5(S, T, Z) + V6(S, T) + V7(S, T, Z)
+
+    TAXA_CUSTO = SOMA_CUST / SOMA_VIDA
+    return TAXA_CUSTO
                 
                 TAXA_CUSTO=SOMA_CUST/SOMA_VIDA
                 return TAXA_CUSTO
