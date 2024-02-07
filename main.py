@@ -371,6 +371,10 @@ def main():
             def cond2(y):
                 return y[2]-y[1] #Z>=T
             #termina aqui
+def cond2(y):
+                return y[2] - y[1]  # Z >= T
+            
+            # termina aqui
             for i in range(0, 400):
                 beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
                 eta = random.uniform(Eta * (1 - etaetaimprec), Eta * (1 + etaetaimprec))
@@ -386,11 +390,12 @@ def main():
                 st.write("Média da Taxa de Custo:", sum(Lista_test) / len(Lista_test))
                 st.write('Desvio Padrão da Taxa de Custo:', np.std(Lista_test))
                 
-                   # Criar box-plot
+                # Criar box-plot
                 st.boxplot(Lista_test)
                 st.title('Box-Plot da Taxa de Custo')
                 st.ylabel('Taxa de Custo')
                 st.show()
+
             
     if choice == menu[2]:
         st.header(menu[2])
