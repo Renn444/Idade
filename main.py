@@ -365,8 +365,6 @@ def main():
             TAXA_CUSTO = SOMA_CUST / SOMA_VIDA
             return TAXA_CUSTO
                 
-                TAXA_CUSTO=SOMA_CUST/SOMA_VIDA
-                return TAXA_CUSTO
             x0 = [0.9, 1.0,2.0]
             
             def cond1(y):
