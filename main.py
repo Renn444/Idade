@@ -276,8 +276,6 @@ def main():
 
         botao = st.button("Obtenha os valores")
         if botao:
-            resultados = []
-            Lista_test= []#começa aqui
             def fx(x):
                f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta)
                return f
@@ -369,8 +367,9 @@ def main():
                 return y[1]-y[0] #T>=S
             
             def cond2(y):
-                return y[2]-y[1] #Z>=T  
-            # termina aqui
+                return y[2]-y[1] #Z>=T
+            
+            Lista_test= []
             for i in range(0, 400):
                 beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
                 eta = random.uniform(Eta * (1 - etaimprec), Eta * (1 + etaimprec))
@@ -382,17 +381,17 @@ def main():
                 cw = random.uniform(Cw * (1 - cwimprec), Cw * (1 + cwimprec))
                 p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))
             
-                cr = objetivo(y)
-                Lista_test.append(cr)
-            print("Média :", sum(Lista_test)/len(Lista_test))
-            print('Devios Padrão:', np.std(Lista_test))
-            
-            # Criar box-plot
-            plt.boxplot(Lista_test)
-            plt.title('Box-Plot da Taxa de Custo')
-            plt.ylabel('Taxa de Custo')
-            plt.show()
-
+               cr = objetivo(y)
+               Lista_test.append(cr)
+        
+           st.write("Média da Taxa de Custo:", sum(Lista_test) / len(Lista_test))
+           st.write('Desvio Padrão da Taxa de Custo:', np.std(Lista_test))
+        
+           # Criar box-plot
+           st.boxplot(Lista_test)
+           st.title('Box-Plot da Taxa de Custo')
+           st.ylabel('Taxa de Custo')
+           st.show()
     if choice == menu[2]:
         st.header(menu[2])
         st.write('''The Research Group on Risk and Decision Analysis in Operations and Maintenance was created in 2012 
