@@ -1,3 +1,4 @@
+
 import math
 import numpy as np
 import pandas as pd
@@ -276,6 +277,8 @@ def main():
 
         botao = st.button("Obtenha os valores")
         if botao:
+            resultados = []
+            Lista_test= []#começa aqui
             def fx(x):
                f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta)
                return f
@@ -294,7 +297,6 @@ def main():
                 return 1- Fh(h) 
             
             def objetivo(y):
-                S, T, Z = y
                 global eta, beta, lbda, p, co, cp, cv, cw, cf
                 
                 S=y[0]
@@ -303,14 +305,10 @@ def main():
                 #CASO 1
                 def P1(S):
                     return Fx(S)
-            
                 def C1(S):
-                    result = cf * P1(S)
-                    print(f"C1(S={S}) = {result}")
-                    return result
-
+                    return cf*P1(S)
                 def V1(S):
-                    return quad(lambda x: x * fx(x), 0, S)[0] 
+                    return (quad(lambda x: x*fx(x), 0, S)[0])  
                 
                 #CASO 2
                 def P2(S,T):
@@ -360,22 +358,20 @@ def main():
                 def V7(S,T,Z):
                     return Z*P7(S, T, Z)
                 
-            print(f"SOMA_PROB: {SOMA_PROB}")
-            print(f"SOMA_CUST: {SOMA_CUST}")
-            print(f"SOMA_VIDA: {SOMA_VIDA}")
-            print(f"TAXA_CUSTO: {TAXA_CUSTO}")
-        
-            return TAXA_CUSTO
+                # SOMA_PROB=P1(S)+P2(S,T)+P3(S, T, Z)+P4(S, T) + P5(S, T, Z) + P6(S, T)+P7(S, T, Z)
+                SOMA_CUST=C1(S)+C2(S,T)+C3(S, T, Z)+C4(S, T) + C5(S, T, Z) + C6(S, T)+C7(S, T, Z)
+                SOMA_VIDA=V1(S)+V2(S,T)+V3(S, T, Z)+V4(S, T) + V5(S, T, Z) + V6(S, T)+V7(S, T, Z)
                 
+                TAXA_CUSTO=SOMA_CUST/SOMA_VIDA
+                return TAXA_CUSTO
             x0 = [0.9, 1.0,2.0]
             
             def cond1(y):
                 return y[1]-y[0] #T>=S
             
             def cond2(y):
-                return y[2]-y[1] #Z>=T
-                
-            Lista_test= []
+                return y[2]-y[1] #Z>=T  
+            # termina aqui
             for i in range(0, 400):
                 beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
                 eta = random.uniform(Eta * (1 - etaimprec), Eta * (1 + etaimprec))
@@ -388,13 +384,15 @@ def main():
                 p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))
                 cr = objetivo(y)
                 Lista_test.append(cr)
-            st.write(f"Média: {sum(Lista_test)/len(Lista_test)}")
-            st.write(f'Desvio Padrão: {np.std(Lista_test)}')
-        
-            # Box plot
-            st.box_plot(Lista_test, labels=["Taxa de Custo"])
-            st.pyplot(plt)
+            print("Média :", sum(Lista_test)/len(Lista_test))
+            print('Devios Padrão:', np.std(Lista_test))
             
+            # Criar box-plot
+          #  plt.boxplot(Lista_test)
+          #  plt.title('Box-Plot da Taxa de Custo')
+           # plt.ylabel('Taxa de Custo')
+            #plt.show()
+
     if choice == menu[2]:
         st.header(menu[2])
         st.write('''The Research Group on Risk and Decision Analysis in Operations and Maintenance was created in 2012 
