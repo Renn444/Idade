@@ -259,7 +259,7 @@ def main():
         P = st.number_input('Probabilidade de Impedimento:')
          
         betaimprec = st.number_input('Imprecisão do Parâmetro de forma (beta)')
-        etaetaimprec = st.number_input('Imprecisão do Parâmetro de escala (eta)')    
+        etaimprec = st.number_input('Imprecisão do Parâmetro de escala (eta)')    
         lbdaimprec = st.number_input('Imprecisão da Taxa de Chegada de Oportunidade (Lambda)')
         cpimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em T(programado):') 
         cvimprec = st.number_input('Imprecisão do Custo de Substituição Preventiva em Z:')
@@ -381,17 +381,16 @@ def main():
                 cf = random.uniform(Cf * (1 - cfimprec), Cf * (1 + cfimprec))
                 cw = random.uniform(Cw * (1 - cwimprec), Cw * (1 + cwimprec))
                 p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))
-            
                 cr = objetivo(y)
                 Lista_test.append(cr)
             print("Média :", sum(Lista_test)/len(Lista_test))
             print('Devios Padrão:', np.std(Lista_test))
             
             # Criar box-plot
-            plt.boxplot(Lista_test)
-            plt.title('Box-Plot da Taxa de Custo')
-            plt.ylabel('Taxa de Custo')
-            plt.show()
+          #  plt.boxplot(Lista_test)
+          #  plt.title('Box-Plot da Taxa de Custo')
+           # plt.ylabel('Taxa de Custo')
+            #plt.show()
 
     if choice == menu[2]:
         st.header(menu[2])
