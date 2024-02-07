@@ -305,8 +305,10 @@ def main():
                     return Fx(S)
             
                 def C1(S):
-                    return cf * P1(S)
-            
+                    result = cf * P1(S)
+                    print(f"C1(S={S}) = {result}")
+                    return result
+
                 def V1(S):
                     return quad(lambda x: x * fx(x), 0, S)[0] 
                 
