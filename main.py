@@ -373,7 +373,7 @@ def main():
             #termina aqui
             for i in range(0, 400):
                 beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
-                eta = random.uniform(Eta * (1 - etaimprec), Eta * (1 + etaimprec))
+                eta = random.uniform(Eta * (1 - etaetaimprec), Eta * (1 + etaetaimprec))
                 lbda = random.uniform(Lbda * (1 - lbdaimprec), Lbda * (1 + lbdaimprec))
                 cp = random.uniform(Cp * (1 - cpimprec), Cp * (1 + cpimprec))
                 cv = random.uniform(Cv * (1 - cvimprec), Cv * (1 + cvimprec))
