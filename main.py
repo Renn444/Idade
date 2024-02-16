@@ -247,7 +247,7 @@ def main():
 
     if choice == menu[1]:
         st.header(menu[1])
-        st.write('''Fazer o texto para colocar aqui''')
+        st.write('''Análise de Sensibilidade''')
         Beta = st.number_input('Parâmetro de forma (beta)')
         Eta = st.number_input('Parâmetro de escala (eta)')    
         Lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
