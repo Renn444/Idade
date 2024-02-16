@@ -246,9 +246,9 @@ def main():
                 st.write(f'Média da Taxa de Custo: {media}')
                 st.write(f'Desvio Padrão da Taxa de Custo: {desvio_padrao}')
 
-       if choice == menu[1]:
-           st.header(menu[1])
-           st.subheader("Insira os valores dos parâmetros abaixo:")
+        if choice == menu[1]:
+            st.header(menu[1])
+            st.subheader("Insira os valores dos parâmetros abaixo:")
             Beta = st.number_input('Parâmetro de forma (beta)')
             Eta = st.number_input('Parâmetro de escala (eta)')    
             Lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
