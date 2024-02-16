@@ -303,8 +303,9 @@ def main():
                 #CASO 1
                 def P1(S):
                     return Fx(S)
+                
                 def C1(S):
-                    return cf*P1(S)
+                    return cf * P1(S)
                 def V1(S):
                     return (quad(lambda x: x*fx(x), 0, S)[0])  
                 
