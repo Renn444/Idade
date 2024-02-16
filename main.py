@@ -272,10 +272,11 @@ def main():
             T= st.number_input('Valor de T')    
             Z= st.number_input('Valor de Z')
             y = (S, T, Z)         
-           st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
-           
-           botao = st.button("Obtenha os valores")
-           if botao: 
+            
+            st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
+            
+            botao = st.button("Obtenha os valores")
+            if botao: 
                resultados = [] 
                # Definições das funções
                def fx(x): 
