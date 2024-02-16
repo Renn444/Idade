@@ -8,9 +8,9 @@ import sys
 from streamlit import cli as stcli
 from PIL import Image
 import random 
-import matplotlib.pyplot as plt # Add this line to import the 'random' module
-
-
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use("Agg")
 # Funções e definições anteriores
 
 def main():
