@@ -294,7 +294,7 @@ def main():
                return 1 - np.exp(-(lbda*h))
             def Rh(h):
                 return 1- Fh(h) 
-            
+                       
             def objetivo(y):
                 global eta, beta, lbda, p, co, cp, cv, cw, cf
                 
@@ -369,7 +369,7 @@ def main():
                 return y[1]-y[0] #T>=S
             
             def cond2(y):
-                return y[2]-y[1] #Z>=T
+                return y[2]-y[1] #Z>=T  
 
             for i in range(0, 400):
                 beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
