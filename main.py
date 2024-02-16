@@ -355,7 +355,7 @@ def main():
             
             TAXA_CUSTO = SOMA_CUST / SOMA_VIDA
             return TAXA_CUSTO
-        except Exception as e:
+            except Exception as e:
             st.error(f"Erro durante o cálculo: {str(e)}")
             st.error(f"Valores de entrada (y): {y}")
             st.error(f"Valores de variáveis globais (beta, eta, lbda, p, co, cp, cv, cw, cf): {beta}, {eta}, {lbda}, {p}, {co}, {cp}, {cv}, {cw}, {cf}")
