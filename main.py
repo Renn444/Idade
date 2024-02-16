@@ -8,7 +8,8 @@ import sys
 from streamlit import cli as stcli
 from PIL import Image
 import random 
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # Add this line to import the 'random' module
+
 
 # Funções e definições anteriores
 
@@ -19,7 +20,7 @@ def main():
 
     st.title('Política de Substituição Preventiva com Oportunidade e Prorrogação')
 
-    menu = ["Aplicação", "Análise de Sensibilidade da Política STZ", "Website"]
+    menu = ["Aplicação", "Informação", "Website"]
     choice = st.sidebar.selectbox("Selecione aqui", menu)
     
     if choice == menu[0]:
@@ -247,7 +248,7 @@ def main():
 
     if choice == menu[1]:
         st.header(menu[1])
-        st.write('''Insira os valores dos parâmetros abaixo:''')
+        st.write('''Fazer o texto para colocar aqui''')
         Beta = st.number_input('Parâmetro de forma (beta)')
         Eta = st.number_input('Parâmetro de escala (eta)')    
         Lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
@@ -277,7 +278,7 @@ def main():
         botao = st.button("Obtenha os valores")
         if botao:
             resultados = []
-            Lista_test= [] #não sei se isso deveria estar aqui
+            Lista_test= []#começa aqui
             def fx(x):
                f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta)
                return f
@@ -285,7 +286,9 @@ def main():
                 return 1 - np.exp(-(x/eta)**beta) 
             def Rx(x): 
                 return 1 - Fx(x)
-    
+                
+            # parte que não entendi muito bem 
+            # tempo entre oportunidades
             def fh(h):
                return lbda*np.exp(-(lbda*h))
             def Fh(h):
@@ -367,9 +370,8 @@ def main():
                 return y[1]-y[0] #T>=S
             
             def cond2(y):
-                return y[2]-y[1] #Z>=T
-            
-            Lista_test= []
+                return y[2]-y[1] #Z>=T  
+            # termina aqui
             for i in range(0, 400):
                 beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
                 eta = random.uniform(Eta * (1 - etaimprec), Eta * (1 + etaimprec))
@@ -379,17 +381,24 @@ def main():
                 co = random.uniform(Co * (1 - coimprec), Co * (1 + coimprec))
                 cf = random.uniform(Cf * (1 - cfimprec), Cf * (1 + cfimprec))
                 cw = random.uniform(Cw * (1 - cwimprec), Cw * (1 + cwimprec))
-                p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))            
+                p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))
                 cr = objetivo(y)
                 Lista_test.append(cr)
+                 # Exibir média e desvio padrão
+            st.write("Média:", sum(Lista_test) / len(Lista_test))
+            st.write('Desvio Padrão:', np.std(Lista_test))
+            
+            # Criar box-plot
+            fig, ax = plt.subplots()
+            ax.boxplot(Lista_test)
+            ax.set_title('Box-Plot da Taxa de Custo')
+            ax.set_ylabel('Taxa de Custo')
+            
+            # Exibir o gráfico no Streamlit
+            st.pyplot(fig)
             print("Média :", sum(Lista_test)/len(Lista_test))
             print('Devios Padrão:', np.std(Lista_test))
             
-            # Criar box-plot
-            plt.boxplot(Lista_test)
-            plt.title('Box-Plot da Taxa de Custo')
-            plt.ylabel('Taxa de Custo')
-            plt.show()
 
     if choice == menu[2]:
         st.header(menu[2])
