@@ -19,7 +19,7 @@ def main():
 
     st.title('Política de Substituição Preventiva com Oportunidade e Prorrogação')
 
-    menu = ["Aplicação", "Informação", "Website"]
+    menu = ["Aplicação", "Análise de Sensibilidade da Política STZ", "Website"]
     choice = st.sidebar.selectbox("Selecione aqui", menu)
     
     if choice == menu[0]:
@@ -379,8 +379,7 @@ def main():
                 co = random.uniform(Co * (1 - coimprec), Co * (1 + coimprec))
                 cf = random.uniform(Cf * (1 - cfimprec), Cf * (1 + cfimprec))
                 cw = random.uniform(Cw * (1 - cwimprec), Cw * (1 + cwimprec))
-                p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))
-            
+                p = random.uniform(P * (1 - etaimprec), P * (1 + etaimprec))            
                 cr = objetivo(y)
                 Lista_test.append(cr)
             print("Média :", sum(Lista_test)/len(Lista_test))
