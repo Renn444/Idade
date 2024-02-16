@@ -297,73 +297,65 @@ def main():
             def objetivo(y):
                 global eta, beta, lbda, p, co, cp, cv, cw, cf
                 
-                S=y[0]
-                T=y[1]
-                Z=y[2]
-                #CASO 1
-                # Alteração na definição da função P1
+                S = y[0]
+                T = y[1]
+                Z = y[2]
+            
                 def P1(S):
-                    return Fx(S)  # Adicionei um argumento x para a função Fx
-                # Função C1
+                    return Fx(S) * Rx(S)
                 def C1(S):
                     return cf * P1(S)
                 def V1(S):
-                    return (quad(lambda x: x*fx(x), 0, S)[0])  
+                    return (quad(lambda x: x * fx(x), 0, S)[0]) * Rx(S)
+            
+                def P2(S, T):
+                    return Rh(T-S) * (Fx(T) - Fx(S)) + (dblquad(lambda x, h: fh(h) * fx(x), 0, T-S, lambda h: S, lambda h: S+h)[0])
+                def C2(S, T):
+                    return cf * P2(S, T)
+                def V2(S, T):
+                    return Rh(T-S) * (quad(lambda x: x * fx(x), S, T)[0]) * Rx(S + (T - S) / 2)
+            
+                def P3(S, T, Z):
+                    return p * Rh(Z-S) * (Fx(Z) - Fx(T)) + p * (dblquad(lambda x, h: fh(h) * fx(x), T-S, Z-S, lambda h: T, lambda h: h+S)[0])
+                def C3(S, T, Z):
+                    return cf * P3(S, T, Z)
+                def V3(S, T, Z):
+                    return p * Rh(T-S) * (quad(lambda x: x * fx(x), T, Z)[0]) * Rx(Z)
+            
+                def P4(S, T):
+                    return quad(lambda h: fh(h) * Rx(S + h), 0, T-S)[0]
+                def C4(S, T):
+                    return co * P4(S, T)
+                def V4(S, T):
+                    return quad(lambda h: (S + h) * fh(h) * Rx(S + h), 0, T-S)[0]
+            
+                def P5(S, T, Z):
+                    return p * quad(lambda h: fh(h) * Rx(S + h), T-S, Z-S)[0]
+                def C5(S, T, Z):
+                    return cw * P5(S, T, Z)
+                def V5(S, T, Z): 
+                    return p * quad(lambda h: (S + h) * fh(h) * Rx(S + h), T-S, Z-S)[0]
+            
+                def P6(S, T):
+                    return (1-p) * Rh(T-S) * Rx(T) 
+                def C6(S, T):
+                    return cp * P6(S, T)
+                def V6(S, T):
+                    return T * P6(S, T)
+            
+                def P7(S, T, Z):
+                    return p * Rh(Z-S) * Rx(Z)
+                def C7(S, T, Z):
+                    return cv * P7(S, T, Z)
+                def V7(S, T, Z):
+                    return Z * P7(S, T, Z)
+            
+                SOMA_CUST = C1(S) + C2(S, T) + C3(S, T, Z) + C4(S, T) + C5(S, T, Z) + C6(S, T) + C7(S, T, Z)
+                SOMA_VIDA = V1(S) + V2(S, T) + V3(S, T, Z) + V4(S, T) + V5(S, T, Z) + V6(S, T) + V7(S, T, Z)
                 
-                #CASO 2
-                def P2(S,T):
-                    return Rh(T-S)*(Fx(T) - Fx(S)) + (dblquad(lambda x, h: fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
-                def C2(S,T):
-                    return cf*P2(S,T)
-                def V2(S,T):
-                    return Rh(T-S)*(quad(lambda x: x*fx(x), S, T)[0])+ (dblquad(lambda x, h: x*fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
-                
-                #CASO 3
-                def P3(S,T,Z):
-                    return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
-                def C3(S,T,Z):
-                    return cf*P3(S,T,Z)
-                def V3(S,T,Z):
-                    return  p*Rh(T-S)*(quad(lambda x: x*fx(x), T, Z)[0]) + p*(dblquad(lambda x, h: x*fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
-                
-                #CASO 4
-                def P4(S,T):
-                    return (quad(lambda h: fh(h)*Rx(S+h), 0, T-S)[0])
-                def C4(S,T):
-                    return co*P4(S, T)
-                def V4(S,T):
-                    return (quad(lambda h: (S+h)*fh(h)*Rx(S+h), 0, T-S)[0])
-                
-                #CASO 5
-                def P5(S,T,Z):
-                    return p*(quad(lambda h: fh(h)*Rx(S+h), T-S, Z-S)[0])
-                def C5(S,T,Z):
-                    return cw*P5(S, T, Z)
-                def V5(S,T,Z): 
-                    return p*(quad(lambda h: (S+h)*fh(h)*Rx(S+h), T-S, Z-S)[0])
-                
-                #CASO 6
-                def P6(S,T):
-                    return (1-p)*Rh(T-S)*Rx(T) 
-                def C6(S,T):
-                    return cp*P6(S, T)
-                def V6(S,T):
-                    return T*P6(S, T)
-                
-                #CASO 7 
-                def P7(S,T,Z):
-                    return p*Rh(Z-S)*Rx(Z)
-                def C7(S,T,Z):
-                    return cv*P7(S, T, Z)
-                def V7(S,T,Z):
-                    return Z*P7(S, T, Z)
-                
-                # SOMA_PROB=P1(S)+P2(S,T)+P3(S, T, Z)+P4(S, T) + P5(S, T, Z) + P6(S, T)+P7(S, T, Z)
-                SOMA_CUST=C1(S)+C2(S,T)+C3(S, T, Z)+C4(S, T) + C5(S, T, Z) + C6(S, T)+C7(S, T, Z)
-                SOMA_VIDA=V1(S)+V2(S,T)+V3(S, T, Z)+V4(S, T) + V5(S, T, Z) + V6(S, T)+V7(S, T, Z)
-                
-                TAXA_CUSTO=SOMA_CUST/SOMA_VIDA
+                TAXA_CUSTO = SOMA_CUST / SOMA_VIDA
                 return TAXA_CUSTO
+
             x0 = [0.9, 1.0,2.0]
             
             def cond1(y):
