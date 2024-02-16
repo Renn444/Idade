@@ -350,11 +350,17 @@ def main():
                 def V7(S, T, Z):
                     return Z * P7(S, T, Z)
                 
-                SOMA_CUST = C1(S) + C2(S, T) + C3(S, T, Z) + C4(S, T) + C5(S, T, Z) + C6(S, T) + C7(S, T, Z)
-                SOMA_VIDA = V1(S) + V2(S, T) + V3(S, T, Z) + V4(S, T) + V5(S, T, Z) + V6(S, T) + V7(S, T, Z)
-                
-                TAXA_CUSTO = SOMA_CUST / SOMA_VIDA
-                return TAXA_CUSTO
+            SOMA_CUST = C1(S) + C2(S, T) + C3(S, T, Z) + C4(S, T) + C5(S, T, Z) + C6(S, T) + C7(S, T, Z)
+            SOMA_VIDA = V1(S) + V2(S, T) + V3(S, T, Z) + V4(S, T) + V5(S, T, Z) + V6(S, T) + V7(S, T, Z)
+            
+            TAXA_CUSTO = SOMA_CUST / SOMA_VIDA
+            return TAXA_CUSTO
+        except Exception as e:
+            st.error(f"Erro durante o cálculo: {str(e)}")
+            st.error(f"Valores de entrada (y): {y}")
+            st.error(f"Valores de variáveis globais (beta, eta, lbda, p, co, cp, cv, cw, cf): {beta}, {eta}, {lbda}, {p}, {co}, {cp}, {cv}, {cw}, {cf}")
+            st.error(f"Valores de variáveis locais (S, T, Z): {S}, {T}, {Z}")
+            return None
 
             x0 = [0.9, 1.0,2.0]
             
