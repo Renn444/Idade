@@ -301,9 +301,10 @@ def main():
                 T=y[1]
                 Z=y[2]
                 #CASO 1
+                # Alteração na definição da função P1
                 def P1(S):
-                    return Fx(S)
-                
+                    return Fx(S)  # Adicionei um argumento x para a função Fx
+                # Função C1
                 def C1(S):
                     return cf * P1(S)
                 def V1(S):
