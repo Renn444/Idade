@@ -295,73 +295,71 @@ def main():
             
             def objetivo(y):
                 global eta, beta, lbda, p, co, cp, cv, cw, cf
-                
                 S = y[0]
                 T = y[1]
                 Z = y[2]
-            
                 # CASO 1
-                def p1(S):
+                def P1(S):
                     return Fx(S)
-                def c1(S):
-                    return cf*p1(S)
-                def v1(S):
+                def C1(S):
+                    return cf*P1(S)
+                def V1(S):
                     return (quad(lambda x: x*fx(x), 0, S)[0])  
 
                 # CASO 2
-                def p2(S,T):
+                def P2(S,T):
                     return Rh(T-S)*(Fx(T) - Fx(S)) + (dblquad(lambda x, h: fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
-                def c2(S,T):
-                    return cf*p2(S,T)
-                def v2(S,T):
+                def C2(S,T):
+                    return cf*P2(S,T)
+                def V2(S,T):
                     return Rh(T-S)*(quad(lambda x: x*fx(x), S, T)[0])+ (dblquad(lambda x, h: x*fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
 
                 # CASO 3
-                def p3(S,T,Z):
+                def P3(S,T,Z):
                     return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
-                def c3(S,T,Z):
-                    return cf*p3(S,T,Z)
-                def v3(S,T,Z):
+                def C3(S,T,Z):
+                    return cf*P3(S,T,Z)
+                def V3(S,T,Z):
                     return  p*Rh(T-S)*(quad(lambda x: x*fx(x), T, Z)[0]) + p*(dblquad(lambda x, h: x*fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
 
                 # CASO 4
-                def p4(S,T):
+                def P4(S,T):
                     return (quad(lambda h: fh(h)*Rx(S+h), 0, T-S)[0])
-                def c4(S,T):
-                    return co*p4(S, T)
-                def v4(S,T):
+                def C4(S,T):
+                    return co*P4(S, T)
+                def V4(S,T):
                     return (quad(lambda h: (S+h)*fh(h)*Rx(S+h), 0, T-S)[0])
 
                 # CASO 5
-                def p5(S,T,Z):
+                def P5(S,T,Z):
                     return p*(quad(lambda h: fh(h)*Rx(S+h), T-S, Z-S)[0])
-                def c5(S,T,Z):
-                    return cw*p5(S, T, Z)
-                def v5(S,T,Z): 
+                def C5(S,T,Z):
+                    return cw*P5(S, T, Z)
+                def V5(S,T,Z): 
                     return p*(quad(lambda h: (S+h)*fh(h)*Rx(S+h), T-S, Z-S)[0])
 
                 # CASO 6
-                def p6(S,T):
+                def P6(S,T):
                     return (1-p)*Rh(T-S)*Rx(T) 
-                def c6(S,T):
-                    return cp*p6(S, T)
-                def v6(S,T):
-                    return T*p6(S, T)
+                def C6(S,T):
+                    return cp*P6(S, T)
+                def V6(S,T):
+                    return T*P6(S, T)
 
                 # CASO 7 
-                def p7(S,T,Z):
+                def P7(S,T,Z):
                     return p*Rh(Z-S)*Rx(Z)
-                def c7(S,T,Z):
-                    return cv*p7(S, T, Z)
-                def v7(S,T,Z):
-                    return Z*p7(S, T, Z)
+                def C7(S,T,Z):
+                    return cv*P7(S, T, Z)
+                def V7(S,T,Z):
+                    return Z*P7(S, T, Z)
 
-                # SOMA_PROB=P1(S)+P2(S,T)+P3(S, T, Z)+P4(S, T) + P5(S, T, Z) + P6(S, T)+P7(S, T, Z)
-                SOMA_CUSTT=c1(S)+c2(S,T)+c3(S, T, Z)+c4(S, T) + c5(S, T, Z) + c6(S, T)+c7(S, T, Z)
-                SOMA_VIDAA=v1(S)+v2(S,T)+v3(S, T, Z)+v4(S, T) + v5(S, T, Z) + v6(S, T)+v7(S, T, Z)
+                #SOMA_PROB=P1(S)+P2(S,T)+P3(S, T, Z)+P4(S, T) + P5(S, T, Z) + P6(S, T)+P7(S, T, Z)
+                SOMA_CUST=C1(S)+C2(S,T)+C3(S, T, Z)+C4(S, T) + C5(S, T, Z) + C6(S, T)+C7(S, T, Z)
+                SOMA_VIDA=V1(S)+V2(S,T)+V3(S, T, Z)+V4(S, T) + V5(S, T, Z) + V6(S, T)+V7(S, T, Z)
 
-                TAXA_CUSTOO=SOMA_CUSTt/SOMA_VIDAA
-                return TAXA_CUSTOO
+                TAXA_CUSTO=SOMA_CUST/SOMA_VIDA
+                return TAXA_CUSTO
 
             x0 = [0.9, 1.0,2.0]
             
