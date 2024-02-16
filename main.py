@@ -8,8 +8,8 @@ import sys
 from streamlit import cli as stcli
 from PIL import Image
 import random 
-import matplotlib.pyplot as plt
-st.run_on_save("pip install matplotlib") 
+# import matplotlib.pyplot as plt
+
 # Funções e definições anteriores
 
 def main():
