@@ -9,8 +9,6 @@ from streamlit import cli as stcli
 from PIL import Image
 import random 
 
-
-
 # Funções e definições anteriores
 
 def main():
@@ -370,8 +368,29 @@ def main():
                 return y[1]-y[0] #T>=S
             
             def cond2(y):
-                return y[2]-y[1] #Z>=T  
-            # termina aqui
+                return y[2]-y[1] #Z>=T
+            
+            
+            # c1={'type':'ineq','fun':cond1}
+            # c2={'type':'ineq','fun':cond2}
+            
+            
+            # cons=[c1, c2]
+            
+            
+            # bx0=[0.1,50]
+            # bx1=[0.1,50]
+            # bx2=[0.1,50]
+            # ret=minimize(objetivo, x0, method='SLSQP', bounds=[bx0,bx1,bx2], constraints=cons)
+            # S=ret.x[0]
+            # T=ret.x[1]
+            # Z=ret.x[2]     
+            
+            # print("S=", S)
+            # print("T=",T)
+            # print("Z=",Z)
+            # print("Taxa de custo=", ret.fun)
+                        # termina aqui
             for i in range(0, 400):
                 beta = random.uniform(Beta * (1 - betaimprec), Beta * (1 + betaimprec))
                 eta = random.uniform(Eta * (1 - etaimprec), Eta * (1 + etaimprec))
