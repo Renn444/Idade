@@ -297,14 +297,16 @@ def main():
                 # CASO 1
                 def P1(S):
                     return Fx(S)
+                #P1 = 0.2
                 def C1(S):
                     return Cf*P1(S)
+                    #return cf*P1
                 def V1(S):
                     return (quad(lambda x: x*fx(x), 0, S)[0])  
 
                 # CASO 2
                 def P2(S,T):
-                    return Rh(T-S)*(Fx(T) - Fx(S)) + (dblquad(lambda x, h: fh(h)*fx(x), 0, T-S, lambda x: S, lambda x: S+h)[0])
+                    return Rh(T-S)*(Fx(T) - Fx(S)) + (dblquad(lambda x, h: fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
                 def C2(S,T):
                     return Cf*P2(S,T)
                 def V2(S,T):
@@ -312,7 +314,8 @@ def main():
 
                 # CASO 3
                 def P3(S,T,Z):
-                    return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
+                    #return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
+                    return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), T-S, Z-S, lambda x: T, lambda x: h+S)[0])
                 def C3(S,T,Z):
                     return Cf*P3(S,T,Z)
                 def V3(S,T,Z):
@@ -355,7 +358,7 @@ def main():
                 SOMA_VIDA=V1(S)+V2(S,T)+V3(S, T, Z)+V4(S, T) + V5(S, T, Z) + V6(S, T)+V7(S, T, Z)
 
                 TAXA_CUSTO=SOMA_CUST/SOMA_VIDA
-                return TAXA_CUSTO
+                return TAXA_CUSTO 
 
             x0 = [0.9, 1.0,2.0]
             
