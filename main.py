@@ -319,7 +319,7 @@ def main():
                 # CASO 3
                 def P3(S,T,Z):
                     #return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
-                    return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), lambda x: T, lambda x: h+S, lambda h: T-S, lambda x: Z-S)[0])
+                    return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), T-S, Z-S, lambda x: T, lambda x: h+S)[0])
                 def C3(S,T,Z):
                     return Cf*P3(S,T,Z)
                 def V3(S,T,Z):
