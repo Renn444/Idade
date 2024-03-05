@@ -299,10 +299,12 @@ def main():
                 T = y[1]
                 Z = y[2]
                 # CASO 1
-                def P1(S):
-                    return Fx(S)
+                #def P1(S):
+                    #return Fx(S)
+                P1 = 0.2
                 def C1(S):
-                    return cf*P1(S)
+                    #return cf*P1(S)
+                    return cf*P1
                 def V1(S):
                     return (quad(lambda x: x*fx(x), 0, S)[0])  
 
