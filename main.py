@@ -442,9 +442,7 @@ def main():
                 SOMA_VIDA=V1(S)+V2(S,T)+V3(S, T, Z)+V4(S, T) + V5(S, T, Z) + V6(S, T)+V7(S, T, Z)
 
                 TAXA_CUSTO=SOMA_CUST/SOMA_VIDA
-                return TAXA_CUSTO
-                '''
-        
+                return TAXA_CUSTO '''
 
             x0 = [0.9, 1.0,2.0]
             
