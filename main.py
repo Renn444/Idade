@@ -312,7 +312,7 @@ def main():
                 def P2(S,T):
                     return Rh(T-S)*(Fx(T) - Fx(S)) + (dblquad(lambda x, h: fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
                 def C2(S,T):
-                    return cf*P2(S,T)
+                    return Cf*P2(S,T)
                 def V2(S,T):
                     return Rh(T-S)*(quad(lambda x: x*fx(x), S, T)[0])+ (dblquad(lambda x, h: x*fh(h)*fx(x), 0, T-S, S, lambda h: S+h)[0])
 
@@ -320,7 +320,7 @@ def main():
                 def P3(S,T,Z):
                     return p*Rh(Z-S)*(Fx(Z)-Fx(T)) + p*(dblquad(lambda x, h: fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
                 def C3(S,T,Z):
-                    return cf*P3(S,T,Z)
+                    return Cf*P3(S,T,Z)
                 def V3(S,T,Z):
                     return  p*Rh(T-S)*(quad(lambda x: x*fx(x), T, Z)[0]) + p*(dblquad(lambda x, h: x*fh(h)*fx(x), T-S, Z-S, T, lambda h: h+S)[0])
 
@@ -328,7 +328,7 @@ def main():
                 def P4(S,T):
                     return (quad(lambda h: fh(h)*Rx(S+h), 0, T-S)[0])
                 def C4(S,T):
-                    return co*P4(S, T)
+                    return Co*P4(S, T)
                 def V4(S,T):
                     return (quad(lambda h: (S+h)*fh(h)*Rx(S+h), 0, T-S)[0])
 
@@ -336,7 +336,7 @@ def main():
                 def P5(S,T,Z):
                     return p*(quad(lambda h: fh(h)*Rx(S+h), T-S, Z-S)[0])
                 def C5(S,T,Z):
-                    return cw*P5(S, T, Z)
+                    return Cw*P5(S, T, Z)
                 def V5(S,T,Z): 
                     return p*(quad(lambda h: (S+h)*fh(h)*Rx(S+h), T-S, Z-S)[0])
 
@@ -344,7 +344,7 @@ def main():
                 def P6(S,T):
                     return (1-p)*Rh(T-S)*Rx(T) 
                 def C6(S,T):
-                    return cp*P6(S, T)
+                    return Cp*P6(S, T)
                 def V6(S,T):
                     return T*P6(S, T)
 
@@ -352,7 +352,7 @@ def main():
                 def P7(S,T,Z):
                     return p*Rh(Z-S)*Rx(Z)
                 def C7(S,T,Z):
-                    return cv*P7(S, T, Z)
+                    return Cv*P7(S, T, Z)
                 def V7(S,T,Z):
                     return Z*P7(S, T, Z)
 
