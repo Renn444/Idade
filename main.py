@@ -24,15 +24,16 @@ def main():
         st.header(menu[0])
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
-        beta = st.number_input('Parâmetro de forma (beta)', value=np.random.uniform(2, 5), step=0.1, format='%.1f')
-        eta = st.number_input('Parâmetro de escala (eta)', value=np.random.uniform(3, 4), step=0.1, format='%.1f')
-        lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)', value=np.random.uniform(0, 4), step=0.1, format='%.1f')
-        cp = st.number_input('Custo de Substituição Preventiva em T(programado):', value=1.0, step=10.0, format='%.1f') #FEITO
-        cv = st.number_input('Custo de Substituição Preventiva em Z:', value=np.random.uniform(1, 3), step=10.0, format='%.1f')
-        co = st.number_input('Custo de Substituição Preventiva em Oportunidade:', value=np.random.uniform(0.25, 1), step=10.0, format='%.1f') #FEITO
-        cf = st.number_input('Custo da manutenção corretiva:', min_value=0.01, step=0.01, value=np.random.uniform(2.5, 10)) #FEITO
-        cw = st.number_input('substituição oportuna entre T e Z:', value=np.random.uniform(0.25, 1), step=10.0, format='%.1f')
-        p = st.number_input('#Probabilidade de Impedimento:', min_value=0.01, step=0.01, value=np.random.uniform(0, 0.2))
+        #beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
+        beta = st.number_input('Parâmetro de forma (beta)')
+        eta = st.number_input('Parâmetro de escala (eta)')    
+        lbda = st.number_input('Taxa de Chegada de Oportunidade (Lambda)')
+        cp = st.number_input('Custo de Substituição Preventiva em T(programado):') 
+        cv = st.number_input('Custo de Substituição Preventiva em Z:')
+        co = st.number_input('Custo de Substituição Preventiva em Oportunidade:') 
+        cf = st.number_input('Custo da manutenção corretiva:') 
+        cw = st.number_input('Substituição oportuna entre T e Z:')
+        p = st.number_input('#Probabilidade de Impedimento:')
         
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
