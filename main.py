@@ -36,8 +36,7 @@ def main():
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
         botao = st.button("Obtenha os valores")
-         if botao:
-        
+        if botao:
             def otm():
 
                 def f_W(x):
