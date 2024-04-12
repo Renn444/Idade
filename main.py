@@ -79,20 +79,21 @@ def main():
                 
                 def restricao(T):
                     return DT_max - RD(T)
-                
-                #PALPITE INICIAL
-                T0=[0.1]
-                
-                #RESTRIÇÕES
-                cons = [{'type':'ineq','fun':restricao}]
-                
-                otimo = minimize(RC,T0,method='SLSQP',constraints=cons)
-                
+                    
+                # PALPITE INICIAL
+                T0 = [0.1]
+            
+                # RESTRIÇÕES
+                cons = [{'type': 'ineq', 'fun': restricao}]
+            
+                otimo = minimize(RC, T0, method='SLSQP', constraints=cons)
+            
                 T_otimo = otimo.x[0]
-                taxa_custo = otimo.fun[0]
-                downtime = RD(otimo.x[0])
-                
-                return T_otimo, taxa_custo, downtime
+                taxa_custo = otimo.fun
+                integral, _ = quad(lambda x: x * f_W(x), 0, T_otimo)
+                MTBOF = (integral + T_otimo * R_W(T_otimo)) / F_aW(T_otimo)
+            
+                return T_otimo, otimo.fun, MTBOF
             
             st.write('O tempo ótimo é:', otm()[0])
             st.write('A taxa de custo é:', otm()[1])
