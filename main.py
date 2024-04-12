@@ -29,13 +29,13 @@ def main():
 
         st.subheader("Insira os valores dos parâmetros abaixo:")
         
-        beta = st.number_input('Parâmetro de forma (beta)', value=2.0, step=0.1, format='%.1f')
-        eta = st.number_input('Parâmetro de escala (eta)', value=100.0, step=10.0, format='%.1f')
-        Cp = st.number_input('Custo da manutenção preventiva (Cp)', value=100.0, step=10.0, format='%.1f')
-        Cf = st.number_input('Custo da manutenção corretiva:', min_value=0.01, step=0.01)
-        Tp = st.number_input('Tempo de inatividade para manutenção preventiva:', min_value=0.01, step=0.01)
-        Tf = st.number_input('Tempo de inatividade resultante de falha:', min_value=0.01, step=0.01)
-        DT_max = st.number_input('Downtime máximo aceito:', min_value=0.01, step=0.01)
+        beta = st.number_input('Parâmetro de forma (beta)',)
+        eta = st.number_input('Parâmetro de escala (eta)',)
+        Cp = st.number_input('Custo da manutenção preventiva (Cp)', ')
+        Cf = st.number_input('Custo da manutenção corretiva:',)
+        Tp = st.number_input('Tempo de inatividade para manutenção preventiva:',)
+        Tf = st.number_input('Tempo de inatividade resultante de falha:', )
+        DT_max = st.number_input('Downtime máximo aceito:', )
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
         botao = st.button("Obtenha os valores")
