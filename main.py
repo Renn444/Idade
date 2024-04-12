@@ -74,11 +74,10 @@ def otm():
     return T_otimo, taxa_custo, MTBOF
     
     if st.button('Calcular ótimos'):
-    tempo_otimo, taxa_custo, mtbof = otm(beta, eta, Cv, Cf, Tp, Tf, DT_max)
-    st.write('O tempo ótimo é:', tempo_otimo)
-    st.write('A taxa de custo é:', taxa_custo)
-    st.write('O MTBOF é:', mtbof)
-
+        tempo_otimo, taxa_custo, mtbof = otm(beta, eta, Cv, Cf, Tp, Tf, DT_max)
+        st.write('O tempo ótimo é:', tempo_otimo)
+        st.write('A taxa de custo é:', taxa_custo)
+        st.write('O MTBOF é:', mtbof)
 
     if choice == menu[1]:
         st.header(menu[1])
