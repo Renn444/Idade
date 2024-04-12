@@ -91,8 +91,8 @@ def main():
         
         tempo_otimo, taxa_custo, mtbof = otm()
             
-            st.write('O tempo ótimo é:', otm()[0])
-            st.write('A taxa de custo é:', otm()[1])
+            st.write('O tempo ótimo é:', tempo_otimo)
+            st.write('A taxa de custo é:', taxa_custo)
             st.write('O MTBOF é:', mtbof)
 
     if choice == menu[1]:
