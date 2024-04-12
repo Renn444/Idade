@@ -98,8 +98,9 @@ def main():
             if botao:
                 # Call the otm() function to get the optimal values
                 tempo_otimo, taxa_custo, mtbof = otm()
-            
-                # Display the results
+                tempo_otimo_formatado = "{:.2f}".format(tempo_otimo)
+                taxa_custo_formatado = "{:.2f}".format(taxa_custo)
+                mtbof_formatado = "{:.2f}".format(mtbof)            
                 st.write('O tempo ótimo é:', tempo_otimo)
                 st.write('A taxa de custo é:', taxa_custo)
                 st.write('O MTBOF é:', mtbof)
