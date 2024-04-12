@@ -33,8 +33,6 @@ def main():
         DT_max = st.number_input('Downtime máximo aceito:', min_value=0.01, step=0.01)
         st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
         
-        st.subheader("Clique no botão abaixo para rodar esse aplicativo:")
-        
         botao = st.button("Obtenha os valores")
         if botao:
             def otm():
