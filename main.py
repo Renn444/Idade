@@ -36,7 +36,7 @@ def main():
         botao = st.button("Obtenha os valores")
         if botao:
             def otm():
-                               def f_W(x):
+                def f_W(x):
                     f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta)
                     return f
                 
