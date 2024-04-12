@@ -97,6 +97,7 @@ def main():
             
             st.write('O tempo ótimo é:', tempo_otimo)
             st.write('A taxa de custo é:', taxa_custo)
+            st.write('O MTBOF é:', mtbof)
     
 
     if choice == menu[1]:
