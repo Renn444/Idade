@@ -26,36 +26,39 @@ def main():
     Tf = st.number_input('Tempo de inatividade resultante de falha:', value=0.0, step=0.1, format='%.1f')
     DT_max = st.number_input('Downtime máximo aceitável:', value=0.0, step=0.1, format='%.1f')
     
-    def otm(beta, eta, Cv, Cf, Tp, Tf, DT_max):
+def otm():
     def f_W(x):
-        return (beta / eta) * ((x / eta) ** (beta - 1)) * np.exp(-(x / eta) ** beta)
-    
+        f = (beta / eta) * ((x / eta)**(beta - 1)) * np.exp(-(x / eta)**beta)
+        return f
+
     def R_W(x):
-        return np.exp(-(x / eta) ** beta)
-    
+        R = np.exp(-(x / eta)**beta)
+        return R
+
     def F_aW(x):
         return 1 - R_W(x)
-    
+
+    # Custo esperado de um ciclo de renovação
     def EC(T):
         return Cv * R_W(T) + Cf * F_aW(T)
-    
+
     def aa(x):
-        return f_W(x) * (x + Tf)
-    
+        return (f_W(x) * (x + Tf))
+
     def EL(T):
         fst = (T + Tp) * R_W(T)
         sec = quad(aa, 0, T)[0]
         return fst + sec
-    
+
     def ED(T):
         return Tp * R_W(T) + Tf * F_aW(T)
-    
+
     def RC(T):
         return EC(T) / EL(T)
-    
+
     def RD(T):
         return ED(T) / EL(T)
-    
+
     def restricao(T):
         return DT_max - RD(T)
     
