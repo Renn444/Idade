@@ -93,7 +93,6 @@ def main():
             
             st.write('O tempo ótimo é:', otm()[0])
             st.write('A taxa de custo é:', otm()[1])
-            #st.write('O downtime é:', otm()[2])
             st.write('O MTBOF é:', mtbof)
 
     if choice == menu[1]:
