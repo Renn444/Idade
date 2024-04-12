@@ -36,8 +36,7 @@ def main():
         botao = st.button("Obtenha os valores")
         if botao:
             def otm():
-
-                def f_W(x):
+                               def f_W(x):
                     f = (beta/eta)*((x/eta)**(beta-1))*np.exp(-(x/eta)**beta)
                     return f
                 
@@ -73,21 +72,22 @@ def main():
                 def restricao(T):
                     return DT_max - RD(T)
                 
-            T0 = [0.1]  # Palpite inicial
-            cons = [{'type': 'ineq', 'fun': restricao}]  # Restrições
+                T0 = [0.1]  # Palpite inicial
+                cons = [{'type': 'ineq', 'fun': restricao}]  # Restrições
+                
+                otimo = minimize(RC, T0, method='SLSQP', constraints=cons)
+                T_otimo = otimo.x[0]
+                taxa_custo = otimo.fun
+                integral, _ = quad(lambda x: x * f_W(x), 0, T_otimo)
+                MTBOF = (integral + T_otimo * R_W(T_otimo)) / F_aW(T_otimo)
             
-            otimo = minimize(RC, T0, method='SLSQP', constraints=cons)
-            T_otimo = otimo.x[0]
-            taxa_custo = otimo.fun
-            integral, _ = quad(lambda x: x * f_W(x), 0, T_otimo)
-            MTBOF = (integral + T_otimo * R_W(T_otimo)) / F_aW(T_otimo)
-            
-            return T_otimo, taxa_custo, MTBOF
-            
-            tempo_otimo, taxa_custo, mtbof = otm(beta, eta, Cv, Cf, Tp, Tf, DT_max)
+                return T_otimo, otimo.fun, MTBOF
+
+            tempo_otimo, taxa_custo, mtbof = otm()
             st.write('O tempo ótimo é:', tempo_otimo)
             st.write('A taxa de custo é:', taxa_custo)
             st.write('O MTBOF é:', mtbof)
+ 
 
     if choice == menu[1]:
         st.header(menu[1])
