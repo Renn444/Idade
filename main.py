@@ -104,9 +104,9 @@ def main():
                 mtbof = float(mtbof)
             
                 # Format the results to two decimal places
-                tempo_otimo_formatado = "{:.2f}".format(tempo_otimo)
-                taxa_custo_formatado = "{:.2f}".format(taxa_custo)
-                mtbof_formatado = "{:.2f}".format(mtbof)
+                tempo_otimo_formatado = "{:.5f}".format(tempo_otimo)
+                taxa_custo_formatado = "{:.5f}".format(taxa_custo)
+                mtbof_formatado = "{:.5f}".format(mtbof)
             
                 # Display the formatted results
                 st.write('O tempo ótimo é:', tempo_otimo_formatado)
