@@ -96,18 +96,22 @@ def main():
                 return T_otimo, otimo.fun, MTBOF
                 
             if botao:
-                # Call the otm() function to get the optimal values
-               
-                # Convert to float if not already a number
-                taxa_custo = float(taxa_custo) if not isinstance(taxa_custo, (float, int)) else taxa_custo
+                tempo_otimo, taxa_custo, mtbof = otm()
+            
+                # Assegure-se de que todos os valores são floats
+                tempo_otimo = float(tempo_otimo)
+                taxa_custo = float(taxa_custo)
+                mtbof = float(mtbof)
             
                 # Format the results to two decimal places
                 tempo_otimo_formatado = "{:.2f}".format(tempo_otimo)
                 taxa_custo_formatado = "{:.2f}".format(taxa_custo)
-                mtbof_formatado = "{:.2f}".format(mtbof)          
-                st.write('O tempo ótimo é:', tempo_otimo)
-                st.write('A taxa de custo é:', taxa_custo)
-                st.write('O MTBOF é:', mtbof)
+                mtbof_formatado = "{:.2f}".format(mtbof)
+            
+                # Display the formatted results
+                st.write('O tempo ótimo é:', tempo_otimo_formatado)
+                st.write('A taxa de custo é:', taxa_custo_formatado)
+                st.write('O MTBOF é:', mtbof_formatado)
 
 
     if choice == menu[1]:
