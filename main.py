@@ -31,7 +31,7 @@ def main():
         
         beta = st.number_input('Parâmetro de forma (beta)',)
         eta = st.number_input('Parâmetro de escala (eta)',)
-        Cp = st.number_input('Custo da manutenção preventiva (Cp)', ')
+        Cp = st.number_input('Custo da manutenção preventiva (Cp)',)
         Cf = st.number_input('Custo da manutenção corretiva:',)
         Tp = st.number_input('Tempo de inatividade para manutenção preventiva:',)
         Tf = st.number_input('Tempo de inatividade resultante de falha:', )
