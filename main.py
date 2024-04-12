@@ -89,7 +89,7 @@ def main():
             
                 return T_otimo, otimo.fun, MTBOF
                 
-                tempo_otimo, taxa_custo, mtbof = otm()
+            tempo_otimo, taxa_custo, mtbof = otm()
                 
             st.write('O tempo ótimo é:', tempo_otimo)
             st.write('A taxa de custo é:', taxa_custo)
